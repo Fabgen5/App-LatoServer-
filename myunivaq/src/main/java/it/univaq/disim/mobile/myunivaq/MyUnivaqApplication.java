@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
 public class MyUnivaqApplication {
@@ -57,9 +59,10 @@ public class MyUnivaqApplication {
             negozio.setNome("Freeway");
             negozio.setDescrizione("Freeway");
             negozio.setCategoria("Freeway");
-            negozio.setGiorniapertura("Freeway");
+            negozio.setGiorniapertura("Lun-Ven");
             negozio.setPiva("Freeway");
-            negozio.setOrario("Freeway");
+            negozio.setOrario("9:00-18:00");
+            negozio.setImmagineprofilo("Negozio0.jpg");
             negozio= negozioRepository.save(negozio);
 
             Negoziante marco = new Negoziante();
@@ -82,6 +85,9 @@ public class MyUnivaqApplication {
             studente.setCorsoDiLaurea(corsoDiLaureaInformatica);
             studente = utenteRepository.save(studente);
 
+            Set<Utente> piace= new HashSet<>();
+            piace.add(marco);
+            piace.add(amleto);
             for (int i = 0; i < 10; i++) {
                 Notizia notizia = new Notizia();
                 notizia.setTitolo("Annuncio " + i);
@@ -89,7 +95,8 @@ public class MyUnivaqApplication {
                 Date dataPubblicazione = new Date(System.currentTimeMillis() - (i * 86400000));
                 notizia.setDataPubblicazione(dataPubblicazione);
                 notizia.setImmagine("image"+ i+".jpg");
-                notizia.setPubblicatoDa(amleto);
+                notizia.setPubblicatoDa(negozio);
+                notizia.setUtentePiace(piace);
                 notizia.setTipologia(tipologiaDidattica);
                 notiziaRepository.save(notizia);
             }

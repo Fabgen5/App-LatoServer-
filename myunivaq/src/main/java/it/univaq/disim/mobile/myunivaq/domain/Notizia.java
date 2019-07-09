@@ -1,15 +1,10 @@
 package it.univaq.disim.mobile.myunivaq.domain;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "notizie")
@@ -34,12 +29,21 @@ public class Notizia {
 	private Date dataPubblicazione;
 
 	@ManyToOne
-	@JoinColumn(name = "ID_UTENTE", nullable = false)
-	private Utente pubblicatoDa;
+	@JoinColumn(name = "ID_NEGOZIO", nullable = false)
+	private Negozio pubblicatoDa;
+
+
+	@ManyToMany
+	@JoinTable(name="UTENTE_NOTIZIA",
+			joinColumns={@JoinColumn(name="ID_NOTIZIA")},
+			inverseJoinColumns={@JoinColumn(name="ID_UTENTE")})
+	private Set<Utente> utentePiace = new HashSet<>();
+
 
 	@ManyToOne
 	@JoinColumn(name = "ID_TIPOLOGIA_NOTIZIA", nullable = false)
 	private TipologiaNotizia tipologia;
+
 
 	public Long getId() {
 		return id;
@@ -81,11 +85,11 @@ public class Notizia {
 		this.dataPubblicazione = dataPubblicazione;
 	}
 
-	public Utente getPubblicatoDa() {
+	public Negozio getPubblicatoDa() {
 		return pubblicatoDa;
 	}
 
-	public void setPubblicatoDa(Utente pubblicatoDa) {
+	public void setPubblicatoDa(Negozio pubblicatoDa) {
 		this.pubblicatoDa = pubblicatoDa;
 	}
 
@@ -95,6 +99,14 @@ public class Notizia {
 
 	public void setTipologia(TipologiaNotizia tipologia) {
 		this.tipologia = tipologia;
+	}
+
+	public Set<Utente> getUtentePiace() {
+		return utentePiace;
+	}
+
+	public void setUtentePiace(Set<Utente> utentePiace) {
+		this.utentePiace = utentePiace;
 	}
 
 }

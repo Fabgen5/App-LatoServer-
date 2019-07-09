@@ -34,6 +34,18 @@ public class Negozio {
     @Column(name = "PIVA", nullable = false, length = 255)
     private String piva;
 
+
+
+    @Column(name = "IMMAGINEPROFILO", nullable = false, length = 255)
+    private String immagineprofilo;
+
+    public String getImmagineprofilo() {
+        return immagineprofilo;
+    }
+
+    public void setImmagineprofilo(String immagineprofilo) {
+        this.immagineprofilo = immagineprofilo;
+    }
     public Long getId() {
         return id;
     }
