@@ -12,10 +12,7 @@ public class UtenteResponse {
 	private String matricola;
 	private String ruolo;
 	private String telefono;
-	
-	public UtenteResponse() {
-	}
-	
+
 	public UtenteResponse(Utente utente) {
 		this.nome = utente.getNome();
 		this.cognome = utente.getCognome();
