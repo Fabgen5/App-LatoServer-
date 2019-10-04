@@ -1,6 +1,7 @@
 package it.univaq.disim.mobile.myunivaq.api;
 
 import it.univaq.disim.mobile.myunivaq.domain.Docente;
+import it.univaq.disim.mobile.myunivaq.domain.Negoziante;
 import it.univaq.disim.mobile.myunivaq.domain.Utente;
 
 public class UtenteResponse {
@@ -18,10 +19,10 @@ public class UtenteResponse {
 		this.cognome = utente.getCognome();
 		this.username = utente.getUsername();
 		this.email = utente.getEmail();
-		if (utente instanceof Docente) {
-			this.ruolo = "docente";
+		if (utente instanceof Negoziante) {
+			this.ruolo = "negoziante";
 		} else {
-			this.ruolo = "studente";
+			this.ruolo = "base";
 		}
 	}
 	
