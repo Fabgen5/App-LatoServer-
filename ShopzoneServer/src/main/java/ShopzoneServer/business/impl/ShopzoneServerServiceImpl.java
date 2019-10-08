@@ -24,12 +24,6 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	private NotiziaRepository notiziaRepository;
 
 	@Autowired
-	private InsegnamentoRepository insegnamentoRepository;
-
-	@Autowired
-	private AppelloRepository appelloRepository;
-
-	@Autowired
 	private NegozioRepository negozioRepository;
 
 
@@ -59,36 +53,6 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 		return utente;
 	}
 
-	@Override
-	public List<Insegnamento> findAllInsegnamenti(Utente utente) throws BusinessException {
-		return insegnamentoRepository.findInsegnamentiByDocenteId(utente.getId(), JpaSort.unsafe(Direction.ASC, "denominazione"));
-	}
 
-	@Override
-	public List<Appello> findAllAppelli(long idInsegnamento) throws BusinessException {
-		return appelloRepository.findAppelliByInsegnamentoId(idInsegnamento);
-	}
-
-	@Override
-	public void createAppello(Appello appello) throws BusinessException {
-		appelloRepository.save(appello);		
-	}
-
-	@Override
-	public Appello findAppelloById(long idAppello) throws BusinessException {
-		return appelloRepository.findById(idAppello).get();
-	}
-
-
-	@Override
-	public void updateAppello(Appello appello) throws BusinessException {
-		appelloRepository.save(appello);
-	}
-
-	@Override
-	public void deleteAppello(long idAppello) throws BusinessException {
-		appelloRepository.deleteById(idAppello);
-		
-	}
 
 }
