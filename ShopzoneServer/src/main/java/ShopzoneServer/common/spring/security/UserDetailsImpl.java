@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import ShopzoneServer.domain.Negoziante;
 import ShopzoneServer.domain.Utente;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import ShopzoneServer.domain.Docente;
-import ShopzoneServer.domain.Studente;
 
 @SuppressWarnings("serial")
 public class UserDetailsImpl implements UserDetails {
@@ -55,11 +53,11 @@ public class UserDetailsImpl implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> result = new ArrayList<>();
 
-		if (utente instanceof Docente) {
+		if (utente instanceof Negoziante) {
 			GrantedAuthorityImpl authorityImpl = new GrantedAuthorityImpl("docente");
 			result.add(authorityImpl);
 		} else {
-			if (utente instanceof Studente) {
+			if (utente instanceof Utente) {
 				GrantedAuthorityImpl authorityImpl = new GrantedAuthorityImpl("studente");
 				result.add(authorityImpl);
 			}

@@ -34,15 +34,11 @@ public class Notizia {
 
 
 	@ManyToMany
-	@JoinTable(name="UTENTE_NOTIZIA",
+	@JoinTable(name="NEGOZIANTE_NOTIZIA",
 			joinColumns={@JoinColumn(name="ID_NOTIZIA")},
 			inverseJoinColumns={@JoinColumn(name="ID_UTENTE")})
 	private Set<Utente> utentePiace = new HashSet<>();
 
-
-	@ManyToOne
-	@JoinColumn(name = "ID_TIPOLOGIA_NOTIZIA", nullable = false)
-	private TipologiaNotizia tipologia;
 
 
 	public Long getId() {
@@ -91,14 +87,6 @@ public class Notizia {
 
 	public void setPubblicatoDa(Negozio pubblicatoDa) {
 		this.pubblicatoDa = pubblicatoDa;
-	}
-
-	public TipologiaNotizia getTipologia() {
-		return tipologia;
-	}
-
-	public void setTipologia(TipologiaNotizia tipologia) {
-		this.tipologia = tipologia;
 	}
 
 	public Set<Utente> getUtentePiace() {
