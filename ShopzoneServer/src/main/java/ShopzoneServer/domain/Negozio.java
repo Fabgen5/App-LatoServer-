@@ -16,6 +16,10 @@ public class Negozio {
     @Column(name = "ID_NEGOZIO", nullable = false)
     private Long id;
 
+
+    @Column(name = "LUOGO", nullable = false, length = 255)
+    private String luogo;
+
     @Column(name = "NOME", nullable = false, length = 255)
     private String nome;
 
@@ -35,7 +39,6 @@ public class Negozio {
     private String piva;
 
 
-
     @Column(name = "IMMAGINEPROFILO", nullable = false, length = 255)
     private String immagineprofilo;
 
@@ -46,6 +49,7 @@ public class Negozio {
     public void setImmagineprofilo(String immagineprofilo) {
         this.immagineprofilo = immagineprofilo;
     }
+
     public Long getId() {
         return id;
     }
@@ -102,4 +106,22 @@ public class Negozio {
         this.piva = piva;
     }
 
+    public String getLuogo() { return luogo; }
+
+    public void setLuogo(String luogo) { this.luogo = luogo; }
+
+    @Override
+    public String toString() {
+        return "Negozio{" +
+                "id=" + id +
+                ", luogo='" + luogo + '\'' +
+                ", nome='" + nome + '\'' +
+                ", descrizione='" + descrizione + '\'' +
+                ", orario='" + orario + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", giorniapertura='" + giorniapertura + '\'' +
+                ", piva='" + piva + '\'' +
+                ", immagineprofilo='" + immagineprofilo + '\'' +
+                '}';
+    }
 }

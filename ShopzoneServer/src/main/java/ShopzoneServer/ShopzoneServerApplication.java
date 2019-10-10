@@ -34,6 +34,7 @@ public class ShopzoneServerApplication {
             negozio.setNome("Freeway");
             negozio.setDescrizione("Freeway");
             negozio.setCategoria("Streetwear");
+            negozio.setLuogo("Teramo");
             negozio.setGiorniapertura("Lun-Ven");
             negozio.setPiva("Freeway");
             negozio.setOrario("9:00-18:00");
@@ -45,6 +46,7 @@ public class ShopzoneServerApplication {
             negozio2.setNome("Stardust");
             negozio2.setDescrizione("Stardust dal 1999");
             negozio2.setCategoria("Streetwear");
+            negozio2.setLuogo("Teramo");
             negozio2.setGiorniapertura("Lun-Ven");
             negozio2.setPiva("Stardust");
             negozio2.setOrario("9:00-18:00");

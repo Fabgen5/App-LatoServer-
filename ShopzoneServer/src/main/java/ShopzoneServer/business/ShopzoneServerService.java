@@ -16,4 +16,6 @@ public interface ShopzoneServerService {
 
 	Negozio findNegozioById(Long id) throws BusinessException;
 
+	List<Negozio> findAllNegozioByLuogo(String luogo) throws BusinessException;
+
 }

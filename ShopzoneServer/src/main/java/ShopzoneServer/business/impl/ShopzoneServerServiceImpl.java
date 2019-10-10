@@ -31,6 +31,10 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	public Utente findUtenteByUsername(String username) throws BusinessException {
 		return utenteRepository.findByUsername(username);
 	}
+	@Override
+	public List<Negozio> findAllNegozioByLuogo(String luogo) throws BusinessException {
+		return negozioRepository.findByLuogo(luogo);
+	}
 
 	@Override
 	public List<Notizia> findAllNotizie() throws BusinessException {
@@ -52,7 +56,5 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 		utente.setEmail(profilo.getEmail());
 		return utente;
 	}
-
-
 
 }
