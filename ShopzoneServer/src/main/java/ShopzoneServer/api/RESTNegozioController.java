@@ -20,21 +20,15 @@ public class RESTNegozioController {
     @Autowired
     private ShopzoneServerService service;
 
-   /* @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public Negozio findById(@PathVariable Long id) {
         return service.findNegozioById(id);
-    }*/
-   @GetMapping("/{id}")
-   public List<Negozio>  findById(@PathVariable Long id) {
-       String teramo = "teramo";
 
-       ArrayList<Negozio> Negozi = (ArrayList<Negozio>) service.findAllNegozioByLuogo(teramo);
-       System.out.println(Negozi);
-       return service.findAllNegozioByLuogo(teramo);
-   }
+
     /*@GetMapping("/{luogo}")
     public List<Negozio> findByLuogo(@PathVariable String luogo) {
         return service.findAllNegozioByLuogo(luogo);
     }*/
 
+    }
 }

@@ -1,16 +1,17 @@
 package ShopzoneServer.api;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import ShopzoneServer.domain.Negozio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import ShopzoneServer.business.ShopzoneServerService;
 import ShopzoneServer.domain.Notizia;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/notizie")
@@ -28,13 +29,27 @@ public class RESTNotizieController {
         }
         return notizieResponse ;
     }
+/*
+    @PostMapping(path = "/members", consumes = "application/json", produces = "application/json")
+    public void addMember(@RequestBody Member member) {
+        //code
+    }*/
 
-
+    @PostMapping
+    public List<Negozio>  findByLuogo(@RequestBody SearchRequest searchRequest, HttpServletResponse response) {
+        System.out.println("SONO QUI");
+        System.out.println();
+        ArrayList<Negozio> Negozi = (ArrayList<Negozio>) service.findAllNegozioByLuogo(searchRequest.getSearchinput());
+        System.out.println(Negozi);
+        return service.findAllNegozioByLuogo(searchRequest.getSearchinput());
+    }
 
     @GetMapping("/{id}")
     public NotiziaResponse findById(@PathVariable Long id) {
         return new NotiziaResponse(service.findNotiziaById(id));
     }
+
+
    /* public Notizia findById(@PathVariable Long id) {
         return service.findNotiziaById(id);
     }*/

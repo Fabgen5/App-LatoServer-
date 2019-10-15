@@ -54,6 +54,16 @@ public class ShopzoneServerApplication {
             negozio2= negozioRepository.save(negozio2);
 
 
+            Negozio negozio3 = new Negozio();
+            negozio3.setNome("Stardust2");
+            negozio3.setDescrizione("Stardust2 dal 2010");
+            negozio3.setCategoria("Streetwear");
+            negozio3.setLuogo("Pescara");
+            negozio3.setGiorniapertura("Lun-Ven");
+            negozio3.setPiva("Stardust2");
+            negozio3.setOrario("9:00-18:00");
+            negozio3.setImmagineprofilo("negozio3.jpg");
+            negozio3= negozioRepository.save(negozio3);
 
 
 
@@ -76,6 +86,16 @@ public class ShopzoneServerApplication {
             fabio.setEmail("fabio.quartararo@business.it");
             fabio.setNegozio(negozio2);
             fabio = utenteRepository.save(fabio);
+
+            Negoziante laura = new Negoziante();
+            laura.setUsername("laura");
+            laura.setPassword(passwordEncoder.encode("laura"));
+            laura.setNome("Laura");
+            laura.setCognome("Gentile");
+            laura.setEmail("laura.business@business.it");
+            laura.setNegozio(negozio3);
+            laura = utenteRepository.save(laura);
+
 
             Utente stefano = new Utente();
             stefano.setUsername("stefano");
