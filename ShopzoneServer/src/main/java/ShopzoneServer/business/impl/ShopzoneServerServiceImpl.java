@@ -2,6 +2,7 @@ package ShopzoneServer.business.impl;
 
 import java.util.List;
 
+import ShopzoneServer.api.RegistrazioneRequest;
 import ShopzoneServer.business.impl.repositories.*;
 import ShopzoneServer.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,18 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 		Utente utente = utenteRepository.findByUsername(profilo.getUsername());
 		utente.setEmail(profilo.getEmail());
 		return utente;
+	}
+
+	@Override
+	public Utente nuovoUtente(RegistrazioneRequest registrazioneRequest) throws BusinessException{
+		Utente nuovo = new Utente();
+		nuovo.setNome(registrazioneRequest.getNome());
+		nuovo.setCognome(registrazioneRequest.getCognome());
+		nuovo.setEmail(registrazioneRequest.getEmail());
+		nuovo.setUsername(registrazioneRequest.getUsername());
+		nuovo.setPassword(registrazioneRequest.getPassword());
+		utenteRepository.save(nuovo);
+		return nuovo;
 	}
 
 }

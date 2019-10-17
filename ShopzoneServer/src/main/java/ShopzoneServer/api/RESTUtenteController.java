@@ -34,7 +34,7 @@ public class RESTUtenteController {
 	private JWTTokenUtil jwtTokenUtil;
 
 	@Autowired
-	private ShopzoneServerService myUnivaqService;
+	private ShopzoneServerService shopzoneServerService;
 
 	@PostMapping("/login")
 	public UtenteResponse login(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse response) throws AuthenticationException {
@@ -51,10 +51,19 @@ public class RESTUtenteController {
 		return new UtenteResponse(((UserDetailsImpl) userDetails).getUtente());
 	}
 
-	@PostMapping("/utente/updateprofilo")
-	public UtenteResponse updateProfilo(@RequestBody Utente utente) {
-		Utente nuovoUtente = myUnivaqService.updateProfilo(utente);		
+	@PostMapping("/login/registrazione")
+	public UtenteResponse nuovoUtente(@RequestBody RegistrazioneRequest registrazioneRequest, HttpServletResponse response) {
+		System.out.println("arrivato");
+		Utente nuovoUtente = shopzoneServerService.nuovoUtente(registrazioneRequest);
+		System.out.println(nuovoUtente);
 		return new UtenteResponse(nuovoUtente);
 	}
-	
+
+
+	/*@PostMapping("/utente/updateprofilo")
+	public UtenteResponse updateProfilo(@RequestBody Utente utente) {
+		Utente nuovoUtente = shopzoneServerService.updateProfilo(utente);
+		return new UtenteResponse(nuovoUtente);
+	}
+	*/
 }
