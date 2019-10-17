@@ -8,6 +8,7 @@ import ShopzoneServer.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.JpaSort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,8 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	@Autowired
 	private NegozioRepository negozioRepository;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public Utente findUtenteByUsername(String username) throws BusinessException {
@@ -65,7 +68,7 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 		nuovo.setCognome(registrazioneRequest.getCognome());
 		nuovo.setEmail(registrazioneRequest.getEmail());
 		nuovo.setUsername(registrazioneRequest.getUsername());
-		nuovo.setPassword(registrazioneRequest.getPassword());
+		nuovo.setPassword((passwordEncoder.encode(registrazioneRequest.getPassword())));
 		utenteRepository.save(nuovo);
 		return nuovo;
 	}
