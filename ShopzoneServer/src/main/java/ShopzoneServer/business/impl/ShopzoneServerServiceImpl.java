@@ -2,6 +2,7 @@ package ShopzoneServer.business.impl;
 
 import java.util.List;
 
+import ShopzoneServer.api.NuovoNegozioRequest;
 import ShopzoneServer.api.RegistrazioneRequest;
 import ShopzoneServer.business.impl.repositories.*;
 import ShopzoneServer.domain.*;
@@ -70,6 +71,22 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 		nuovo.setUsername(registrazioneRequest.getUsername());
 		nuovo.setPassword((passwordEncoder.encode(registrazioneRequest.getPassword())));
 		utenteRepository.save(nuovo);
+		return nuovo;
+	}
+
+	@Override
+	public Negozio nuovoNegozio(NuovoNegozioRequest nuovoNegozioRequest) throws BusinessException{
+		Negozio nuovo = new Negozio();
+		nuovo.setNome(nuovoNegozioRequest.getNome());
+		nuovo.setDescrizione(nuovoNegozioRequest.getDescrizione());
+		nuovo.setOrario(nuovoNegozioRequest.getOrario());
+		nuovo.setCategoria(nuovoNegozioRequest.getCategoria());
+		nuovo.setGiorniapertura(nuovoNegozioRequest.getGiorni());
+		nuovo.setPiva(nuovoNegozioRequest.getPiva());
+		nuovo.setImmagineprofilo(nuovoNegozioRequest.getImmagine());
+		nuovo.setLuogo(nuovoNegozioRequest.getLuogo());
+
+		negozioRepository.save(nuovo);
 		return nuovo;
 	}
 

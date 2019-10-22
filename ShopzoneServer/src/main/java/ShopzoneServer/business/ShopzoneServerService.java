@@ -2,12 +2,13 @@ package ShopzoneServer.business;
 
 import java.util.List;
 
+import ShopzoneServer.api.NuovoNegozioRequest;
 import ShopzoneServer.api.RegistrazioneRequest;
 import ShopzoneServer.domain.*;
 
 public interface ShopzoneServerService {
 
-
+	Negozio nuovoNegozio(NuovoNegozioRequest nuovoNegozioRequest) throws BusinessException;
 
 	Utente findUtenteByUsername(String username) throws BusinessException;
 
