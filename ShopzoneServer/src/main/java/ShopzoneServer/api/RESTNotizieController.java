@@ -29,19 +29,15 @@ public class RESTNotizieController {
         }
         return notizieResponse ;
     }
-/*
-    @PostMapping(path = "/members", consumes = "application/json", produces = "application/json")
-    public void addMember(@RequestBody Member member) {
-        //code
-    }*/
 
     @PostMapping
-    public List<Negozio>  findByLuogo(@RequestBody SearchRequest searchRequest, HttpServletResponse response) {
-        System.out.println("SONO QUI");
-        System.out.println();
-        ArrayList<Negozio> Negozi = (ArrayList<Negozio>) service.findAllNegozioByLuogo(searchRequest.getSearchinput());
-        System.out.println(Negozi);
-        return service.findAllNegozioByLuogo(searchRequest.getSearchinput());
+    public List<Negozio>  findByLuogo(@RequestBody String luogo, HttpServletResponse response) {
+        List<Negozio> negozi = service.findAllNegozioByLuogo(luogo);
+        ArrayList<NotiziaResponse> negozioResponse = new ArrayList<>();
+        for(Negozio negozio: negozi){
+            negozioResponse.add(new NegozioResponse(negozio));
+        }
+        return service.findAllNegozioByLuogo(luogo);
     }
 
     @GetMapping("/{id}")
@@ -49,30 +45,4 @@ public class RESTNotizieController {
         return new NotiziaResponse(service.findNotiziaById(id));
     }
 
-
-   /* public Notizia findById(@PathVariable Long id) {
-        return service.findNotiziaById(id);
-    }*/
-
 }
-/*@PostMapping("/login")
-	public UtenteResponse login(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse response) throws AuthenticationException {
-		// Effettuo l'autenticazione
-		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-
-		// Genero Token e lo inserisco nell'header di risposta
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		String token = jwtTokenUtil.generateToken(userDetails);
-		response.setHeader(tokenHeader, token);
-
-		// Ritorno l'utente
-		return new UtenteResponse(((UserDetailsImpl) userDetails).getUtente());
-	}
-
-	@PostMapping("/utente/updateprofilo")
-	public UtenteResponse updateProfilo(@RequestBody Utente utente) {
-		Utente nuovoUtente = myUnivaqService.updateProfilo(utente);
-		return new UtenteResponse(nuovoUtente);
-	}
-	*/
