@@ -28,7 +28,7 @@ public class RESTNegozioController {
     public Negozio nuovoNegozio(@RequestBody NuovoNegozioRequest nuovoNegozioRequest, HttpServletResponse response) {
         System.out.println("negozio arrivato");
         Negozio nuovoNegozio = shopzoneServerService.nuovoNegozio(nuovoNegozioRequest);
-        
+
         return nuovoNegozio;
         }
     }
