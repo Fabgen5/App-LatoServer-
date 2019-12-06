@@ -33,7 +33,7 @@ public class RESTNotizieController {
     @PostMapping
     public List<Negozio>  findByLuogo(@RequestBody String luogo, HttpServletResponse response) {
         List<Negozio> negozi = service.findAllNegozioByLuogo(luogo);
-        ArrayList<NotiziaResponse> negozioResponse = new ArrayList<>();
+        ArrayList<NegozioResponse> negozioResponse = new ArrayList<>();
         for(Negozio negozio: negozi){
             negozioResponse.add(new NegozioResponse(negozio));
         }

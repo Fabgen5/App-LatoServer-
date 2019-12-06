@@ -1,9 +1,6 @@
 package ShopzoneServer.api;
 
 import ShopzoneServer.domain.Negozio;
-import ShopzoneServer.domain.Notizia;
-
-import java.util.Date;
 
 public class NegozioResponse {
 
@@ -12,17 +9,46 @@ public class NegozioResponse {
     private String immagineprofilo;
     private boolean preferito;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getImmagineprofilo() {
+        return immagineprofilo;
+    }
+
+    public void setImmagineprofilo(String immagineprofilo) {
+        this.immagineprofilo = immagineprofilo;
+    }
+
+    public boolean isPreferito() {
+        return preferito;
+    }
+
+    public void setPreferito(boolean preferito) {
+        this.preferito = preferito;
+    }
 
     public NegozioResponse(Negozio negozio) {
         this.id = negozio.getId();
         this.nome = negozio.getNome();
         this.immagineprofilo = negozio.getImmagineprofilo();
-        double rnd= Math.random();
-        if(rnd< 0.5 ){
-
+        double rnd = Math.random();
+        if (rnd < 0.5) {
             this.preferito = true;
-        }else{
+        } else {
             this.preferito = false;
         }
     }
