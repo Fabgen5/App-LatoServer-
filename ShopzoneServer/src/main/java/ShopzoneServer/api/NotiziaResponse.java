@@ -11,7 +11,7 @@ public class NotiziaResponse {
     private String titolo;
     private String decrizione;
     private String immagine;
-    private Date dataPubblicazione;
+    private String dataPubblicazione;
     private Negozio pubblicatoDa;
     private Long numeroPiace;
     private boolean piace;
@@ -48,11 +48,11 @@ public class NotiziaResponse {
         this.immagine = immagine;
     }
 
-    public Date getDataPubblicazione() {
+    public String getDataPubblicazione() {
         return dataPubblicazione;
     }
 
-    public void setDataPubblicazione(Date dataPubblicazione) {
+    public void setDataPubblicazione(String dataPubblicazione) {
         this.dataPubblicazione = dataPubblicazione;
     }
 
@@ -80,15 +80,24 @@ public class NotiziaResponse {
         this.piace = piace;
     }
 
+
     public NotiziaResponse(Notizia notizia) {
         this.id = notizia.getId();
         this.titolo = notizia.getTitolo();
         this.decrizione = notizia.getDescrizione();
         this.immagine = notizia.getImmagine();
-        this.dataPubblicazione = notizia.getDataPubblicazione();
+        Date date = new Date();
+        double rnd= Math.random();
+        if(rnd< 0.5 ){
+
+            this.dataPubblicazione = "Today";
+        }else{
+            this.dataPubblicazione = "Days ago";
+        }
+
         this.pubblicatoDa = notizia.getPubblicatoDa();
         this.numeroPiace = notizia.getId() * 13;
-        if ((this.pubblicatoDa.getId() + this.id) % 2 == 0)
+        if (rnd< 0.5 )
             this.piace = true;
         else {
             this.piace = false;

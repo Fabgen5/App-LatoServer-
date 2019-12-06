@@ -110,7 +110,7 @@ public class ShopzoneServerApplication {
             piace.add(fabio);
             for (int i = 0; i < 10; i++) {
                 Notizia notizia = new Notizia();
-                notizia.setTitolo("Annuncio " + i);
+                notizia.setTitolo("Pellentesque habitant morbi tristique senectus " + i);
                 notizia.setDescrizione("Sconti di " + i + "% su tutta la collezione ");
                 Date dataPubblicazione = new Date(System.currentTimeMillis() - (i * 86400000));
                 notizia.setDataPubblicazione(dataPubblicazione);
