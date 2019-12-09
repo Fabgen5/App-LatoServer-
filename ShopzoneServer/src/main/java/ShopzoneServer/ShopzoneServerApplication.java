@@ -39,7 +39,7 @@ public class ShopzoneServerApplication {
             negozio.setPiva("Freeway");
             negozio.setOrario("9:00-18:00");
             negozio.setImmagineprofilo("Negozio0.jpg");
-            negozio= negozioRepository.save(negozio);
+            negozio = negozioRepository.save(negozio);
 
 
             Negozio negozio2 = new Negozio();
@@ -51,7 +51,7 @@ public class ShopzoneServerApplication {
             negozio2.setPiva("Stardust");
             negozio2.setOrario("9:00-18:00");
             negozio2.setImmagineprofilo("Negozio2.jpg");
-            negozio2= negozioRepository.save(negozio2);
+            negozio2 = negozioRepository.save(negozio2);
 
 
             Negozio negozio3 = new Negozio();
@@ -63,10 +63,7 @@ public class ShopzoneServerApplication {
             negozio3.setPiva("Stardust2");
             negozio3.setOrario("9:00-18:00");
             negozio3.setImmagineprofilo("negozio3.jpg");
-            negozio3= negozioRepository.save(negozio3);
-
-
-
+            negozio3 = negozioRepository.save(negozio3);
 
 
             Negoziante marco = new Negoziante();
@@ -105,7 +102,7 @@ public class ShopzoneServerApplication {
             stefano.setEmail("stefano.tassato@professional.it");
             utenteRepository.save(stefano);
 
-            Set<Utente> piace= new HashSet<>();
+            Set<Utente> piace = new HashSet<>();
             piace.add(marco);
             piace.add(fabio);
             for (int i = 0; i < 10; i++) {
@@ -114,8 +111,20 @@ public class ShopzoneServerApplication {
                 notizia.setDescrizione("Sconti di " + i + "% su tutta la collezione ");
                 Date dataPubblicazione = new Date(System.currentTimeMillis() - (i * 86400000));
                 notizia.setDataPubblicazione(dataPubblicazione);
-                notizia.setImmagine("image"+ i+".jpg");
-                notizia.setPubblicatoDa(negozio);
+                notizia.setImmagine("image" + i + ".jpg");
+                double rnd = Math.random();
+                if (rnd < 0.3) {
+                    notizia.setPubblicatoDa(negozio);
+                } else {
+                    if (rnd < 0.6) {
+                        notizia.setPubblicatoDa(negozio2);
+                    }
+                    else{
+                        notizia.setPubblicatoDa(negozio3);
+                    }
+
+                }
+
                 notizia.setUtentePiace(piace);
                 notiziaRepository.save(notizia);
             }

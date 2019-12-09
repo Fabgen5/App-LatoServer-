@@ -4,7 +4,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import ShopzoneServer.common.Utility;
 import ShopzoneServer.domain.Negozio;
+import ShopzoneServer.domain.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +33,16 @@ public class RESTNotizieController {
     }
 
     @PostMapping
+    public Notizia createNotizia(@RequestBody Notizia notizia)  {
+        Utente utente = Utility.getUtente();
+        notizia.setNegozio
+
+    }
+
+    @PostMapping
     public List<Negozio>  findByLuogo(@RequestBody String luogo, HttpServletResponse response) {
+
+
         List<Negozio> negozi = service.findAllNegozioByLuogo(luogo);
         ArrayList<NegozioResponse> negozioResponse = new ArrayList<>();
         for(Negozio negozio: negozi){
