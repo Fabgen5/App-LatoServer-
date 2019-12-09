@@ -32,11 +32,12 @@ public class RESTNotizieController {
         return notizieResponse ;
     }
 
-    @PostMapping
-    public Notizia createNotizia(@RequestBody Notizia notizia)  {
-        Utente utente = Utility.getUtente();
-        notizia.setNegozio
-
+    @PostMapping("/aggiungi")
+    public NotiziaResponse nuovaNotizia(@RequestBody NuovanotiziaRequest nuovanotiziaRequest, HttpServletResponse response) {
+        System.out.println("sono qui");
+        Notizia nuovaNotizia = service.nuovaNotizia(nuovanotiziaRequest);
+        System.out.println(nuovaNotizia);
+        return new NotiziaResponse(nuovaNotizia);
     }
 
     @PostMapping

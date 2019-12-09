@@ -1,7 +1,10 @@
 package ShopzoneServer.business.impl;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import ShopzoneServer.api.NuovanotiziaRequest;
 import ShopzoneServer.api.NuovoNegozioRequest;
 import ShopzoneServer.api.RegistrazioneRequest;
 import ShopzoneServer.business.impl.repositories.*;
@@ -95,6 +98,18 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 
 		negozioRepository.save(nuovo);
 		return nuovo;
+	}
+
+	@Override
+	public Notizia nuovaNotizia(NuovanotiziaRequest nuovanotiziaRequest)throws BusinessException{
+		Notizia nuova = new Notizia();
+		nuova.setTitolo(nuovanotiziaRequest.getTitolo());
+		nuova.setDescrizione(nuovanotiziaRequest.getDescrizione());
+		nuova.setDataPubblicazione(Timestamp.valueOf(LocalDateTime.now()));
+		nuova.setImmagine("image1.jpg");
+		nuova.setPubblicatoDa(findNegozioById((long)1));
+		notiziaRepository.save(nuova);
+		return nuova;
 	}
 
 }

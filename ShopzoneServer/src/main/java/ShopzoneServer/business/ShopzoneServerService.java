@@ -2,6 +2,7 @@ package ShopzoneServer.business;
 
 import java.util.List;
 
+import ShopzoneServer.api.NuovanotiziaRequest;
 import ShopzoneServer.api.NuovoNegozioRequest;
 import ShopzoneServer.api.RegistrazioneRequest;
 import ShopzoneServer.domain.*;
@@ -25,5 +26,7 @@ public interface ShopzoneServerService {
 	Negozio findNegozioById(Long id) throws BusinessException;
 
 	List<Negozio> findAllNegozioByLuogo(String luogo) throws BusinessException;
+
+	Notizia nuovaNotizia(NuovanotiziaRequest nuovanotiziaRequest)throws BusinessException;
 
 }

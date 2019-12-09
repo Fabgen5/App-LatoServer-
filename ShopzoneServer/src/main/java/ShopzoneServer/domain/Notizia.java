@@ -1,5 +1,6 @@
 package ShopzoneServer.domain;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,15 +22,15 @@ public class Notizia {
 	@Column(name = "DESCRIZIONE", nullable = false, length = 255)
 	private String descrizione;
 
-	@Column(name = "IMMAGINE", nullable = false, length = 255)
+	@Column(name = "IMMAGINE", length = 255)
 	private String immagine;
 
 
-	@Column(name = "DATA_PUBBLICAZIONE", nullable = false)
+	@Column(name = "DATA_PUBBLICAZIONE" )
 	private Date dataPubblicazione;
 
 	@ManyToOne
-	@JoinColumn(name = "ID_NEGOZIO", nullable = false)
+	@JoinColumn(name = "ID_NEGOZIO")
 	private Negozio pubblicatoDa;
 
 
