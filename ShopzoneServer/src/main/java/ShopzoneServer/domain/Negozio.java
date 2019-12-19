@@ -17,6 +17,7 @@ public class Negozio {
     private Long id;
 
 
+
     @Column(name = "LUOGO", nullable = false, length = 255)
     private String luogo;
 

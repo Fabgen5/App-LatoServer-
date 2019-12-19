@@ -1,7 +1,9 @@
 package ShopzoneServer.api;
 
 
+import ShopzoneServer.common.Utility;
 import ShopzoneServer.domain.Negozio;
+import ShopzoneServer.domain.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,7 +29,9 @@ public class RESTNegozioController {
 
     @PostMapping("/nuovo")
     public Negozio nuovoNegozio(@RequestBody NuovoNegozioRequest nuovoNegozioRequest, HttpServletResponse response) {
-        System.out.println("negozio arrivato");
+        Utente utente= Utility.getUtente();
+        System.out.println(utente);
+
         Negozio nuovoNegozio = shopzoneServerService.nuovoNegozio(nuovoNegozioRequest);
 
         return nuovoNegozio;

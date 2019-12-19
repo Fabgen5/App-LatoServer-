@@ -2,7 +2,11 @@ package ShopzoneServer;
 
 import java.util.Arrays;
 
+import ShopzoneServer.common.spring.security.JWTAuthenticationEntryPoint;
+import ShopzoneServer.common.spring.security.JWTAuthenticationTokenFilter;
+import ShopzoneServer.common.spring.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,9 +24,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import ShopzoneServer.common.spring.security.JWTAuthenticationEntryPoint;
-import ShopzoneServer.common.spring.security.JWTAuthenticationTokenFilter;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -32,11 +33,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private JWTAuthenticationEntryPoint unauthorizedHandler;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+
+    private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(this.userDetailsService).passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     // Aggiunto io
@@ -76,9 +78,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().cors()
                 .and().authorizeRequests()
                 //Specificare le url che sono soggette ad autenticazione ed autorizzazione
-                //.antMatchers("/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/api/login/**").permitAll()
-                //.antMatchers("/api/notizie/**").authenticated()
-                .antMatchers("/api/utente/**").authenticated();
+                .antMatchers("/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js", "/api/login/**").permitAll()
+                .antMatchers("/api/notizie/**").permitAll()
+                .antMatchers("/api/preferiti/**").authenticated();
 
 
         // Filtro Custom JWT

@@ -1,10 +1,13 @@
 package ShopzoneServer.common;
 
+
+
+import ShopzoneServer.common.spring.security.UserDetailsImpl;
 import ShopzoneServer.domain.Utente;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import ShopzoneServer.common.spring.security.UserDetailsImpl;
+
 
 public class Utility {
 
@@ -17,6 +20,6 @@ public class Utility {
 		} else {
 			return null;
 		}
-		
+
 	}
 }

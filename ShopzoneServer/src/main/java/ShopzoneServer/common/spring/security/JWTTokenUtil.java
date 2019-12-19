@@ -1,5 +1,4 @@
 package ShopzoneServer.common.spring.security;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,7 +36,7 @@ public class JWTTokenUtil implements Serializable {
 
 	@Value("${jwt.expiration}")
 	private Long expiration;
-	
+
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());

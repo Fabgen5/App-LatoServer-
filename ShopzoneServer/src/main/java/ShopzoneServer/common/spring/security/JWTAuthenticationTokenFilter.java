@@ -1,5 +1,6 @@
 package ShopzoneServer.common.spring.security;
 
+
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -46,7 +47,7 @@ public class JWTAuthenticationTokenFilter extends OncePerRequestFilter {
 			String userName = jwtTokenUtil.getUsernameFromToken(authToken);
 			if (userName != null) {
 				userDetails = userDetailsService.loadUserByUsername(userName);
-			} 
+			}
 
 		}
 

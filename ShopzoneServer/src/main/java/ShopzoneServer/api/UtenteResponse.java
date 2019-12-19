@@ -9,9 +9,7 @@ public class UtenteResponse {
 	private String nome;
 	private String cognome;
 	private String email;
-	private String matricola;
 	private String ruolo;
-	private String telefono;
 
 	public UtenteResponse(Utente utente) {
 		this.nome = utente.getNome();
@@ -58,4 +56,14 @@ public class UtenteResponse {
 		this.ruolo = ruolo;
 	}
 
+	@Override
+	public String toString() {
+		return "UtenteResponse{" +
+				"username='" + username + '\'' +
+				", nome='" + nome + '\'' +
+				", cognome='" + cognome + '\'' +
+				", email='" + email + '\'' +
+				", ruolo='" + ruolo + '\'' +
+				'}';
+	}
 }

@@ -1,6 +1,7 @@
 package ShopzoneServer.api;
 
 import ShopzoneServer.business.ShopzoneServerService;
+import ShopzoneServer.common.Utility;
 import ShopzoneServer.domain.Negozio;
 import ShopzoneServer.domain.Notizia;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class RESTPreferitiController {
         for(Notizia notizia: notizie){
                notizieResponse.add(new NotiziaResponse(notizia));
         }
+        System.out.println(Utility.getUtente());
         return notizieResponse ;
     }
 }

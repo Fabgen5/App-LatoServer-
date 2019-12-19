@@ -100,7 +100,7 @@ public class ShopzoneServerApplication {
             stefano.setNome("Stefano");
             stefano.setCognome("Tassoni");
             stefano.setEmail("stefano.tassato@professional.it");
-            utenteRepository.save(stefano);
+            stefano = utenteRepository.save(stefano);
 
             Set<Utente> piace = new HashSet<>();
             piace.add(marco);
