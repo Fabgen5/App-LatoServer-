@@ -27,5 +27,5 @@ public interface ShopzoneServerService {
 
 	Notizia nuovaNotizia(NuovanotiziaRequest nuovanotiziaRequest)throws BusinessException;
 
-    List<Notizia> findAllNotiziePreferite(Utente utente)throws BusinessException;
+    List<Negozio> findAllNegoziPreferiti(Utente utente)throws BusinessException;
 }

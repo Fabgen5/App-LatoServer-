@@ -51,9 +51,9 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	}
 
 	@Override
-	public List<Notizia> findAllNotiziePreferite(Utente utente) throws BusinessException {
+	public List<Negozio> findAllNegoziPreferiti(Utente utente) throws BusinessException {
 
-		return (List<Notizia>) utente.getNotiziepreferite();
+		return (List<Negozio>) utente.getNegoziPreferiti();
 	}
 
 

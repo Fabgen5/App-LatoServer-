@@ -57,16 +57,6 @@ public class RESTNotizieController {
     }
 
 
-    @GetMapping("/preferiti")
-    public List<NotiziaResponse> listaPreferiti() {
-        Utente utente = Utility.getUtente();
-        List<Notizia> notizie = service.findAllNotiziePreferite(utente);
-        ArrayList<NotiziaResponse> notizieResponse = new ArrayList<>();
-        for (Notizia notizia : notizie) {
-            notizieResponse.add(new NotiziaResponse(notizia));
-        }
-        return notizieResponse;
-    }
 
 }
 
