@@ -8,6 +8,7 @@ import ShopzoneServer.api.NuovanotiziaRequest;
 import ShopzoneServer.api.NuovoNegozioRequest;
 import ShopzoneServer.api.RegistrazioneRequest;
 import ShopzoneServer.business.impl.repositories.*;
+import ShopzoneServer.common.Utility;
 import ShopzoneServer.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort.Direction;
@@ -41,7 +42,7 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	}
 	@Override
 	public List<Negozio> findAllNegozioByLuogo(String luogo) throws BusinessException {
-		return negozioRepository.findByLuogo(luogo);
+		return negozioRepository.findByCitta(luogo);
 	}
 
 	@Override
@@ -50,10 +51,10 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	}
 
 	@Override
-	public List<Notizia> findNotiziePreferite(Negozio id_negozio) throws BusinessException {
-		return notiziaRepository.findByPubblicatoDa(id_negozio);
-	}
+	public List<Notizia> findAllNotiziePreferite(Utente utente) throws BusinessException {
 
+		return (List<Notizia>) utente.getNotiziepreferite();
+	}
 
 
 	@Override
@@ -89,12 +90,9 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 		Negozio nuovo = new Negozio();
 		nuovo.setNome(nuovoNegozioRequest.getNome());
 		nuovo.setDescrizione(nuovoNegozioRequest.getDescrizione());
-		nuovo.setOrario(nuovoNegozioRequest.getOrario());
-		nuovo.setCategoria(nuovoNegozioRequest.getCategoria());
-		nuovo.setGiorniapertura(nuovoNegozioRequest.getGiorni());
-		nuovo.setPiva(nuovoNegozioRequest.getPiva());
 		nuovo.setImmagineprofilo(nuovoNegozioRequest.getImmagine());
-		nuovo.setLuogo(nuovoNegozioRequest.getLuogo());
+		//nuovo.setCitta(nuovoNegozioRequest.getCitta());
+		//nuovo.setVia(nuovoNegozioRequest.setVia());
 
 		negozioRepository.save(nuovo);
 		return nuovo;
@@ -107,9 +105,11 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 		nuova.setDescrizione(nuovanotiziaRequest.getDescrizione());
 		nuova.setDataPubblicazione(Timestamp.valueOf(LocalDateTime.now()));
 		nuova.setImmagine("image1.jpg");
-		nuova.setPubblicatoDa(findNegozioById((long)1));
+		//nuova.setPubblicatoDa(nuovanotiziaRequest.getId_negozio());
 		notiziaRepository.save(nuova);
 		return nuova;
 	}
+
+
 
 }

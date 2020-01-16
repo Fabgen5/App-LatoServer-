@@ -22,4 +22,5 @@ public class Negoziante extends Utente {
         this.negozio = negozio;
     }
 
+
 }

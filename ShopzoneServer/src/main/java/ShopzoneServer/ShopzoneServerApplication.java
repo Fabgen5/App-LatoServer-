@@ -9,9 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import javax.management.StandardEmitterMBean;
+import java.util.*;
 
 @SpringBootApplication
 public class ShopzoneServerApplication {
@@ -33,37 +32,32 @@ public class ShopzoneServerApplication {
             Negozio negozio = new Negozio();
             negozio.setNome("Freeway");
             negozio.setDescrizione("Freeway");
-            negozio.setCategoria("Streetwear");
-            negozio.setLuogo("Teramo");
-            negozio.setGiorniapertura("Lun-Ven");
-            negozio.setPiva("Freeway");
-            negozio.setOrario("9:00-18:00");
+            negozio.setCitta("Teramo");
+            negozio.setVia("Via Madonna degli Angeli, 8");
             negozio.setImmagineprofilo("Negozio0.jpg");
-            negozio = negozioRepository.save(negozio);
+            List<Notizia> notizie= new LinkedList<Notizia>() ;
+            negozio.setNotizie(notizie);
+            negozioRepository.save(negozio);
 
 
             Negozio negozio2 = new Negozio();
-            negozio2.setNome("Stardust");
-            negozio2.setDescrizione("Stardust dal 1999");
-            negozio2.setCategoria("Streetwear");
-            negozio2.setLuogo("Teramo");
-            negozio2.setGiorniapertura("Lun-Ven");
-            negozio2.setPiva("Stardust");
-            negozio2.setOrario("9:00-18:00");
+            negozio2.setNome("Bershka");
+            negozio2.setDescrizione("Abbigliamento uomo donna, orario continuato");
+            negozio2.setCitta("Pescara");
+            negozio2.setVia("Via Pettino, 8");
+            negozio.setNotizie(notizie);
             negozio2.setImmagineprofilo("Negozio2.jpg");
-            negozio2 = negozioRepository.save(negozio2);
+            negozioRepository.save(negozio2);
 
 
             Negozio negozio3 = new Negozio();
-            negozio3.setNome("Stardust2");
+            negozio3.setNome("Stardust");
             negozio3.setDescrizione("Stardust2 dal 2010");
-            negozio3.setCategoria("Streetwear");
-            negozio3.setLuogo("Pescara");
-            negozio3.setGiorniapertura("Lun-Ven");
-            negozio3.setPiva("Stardust2");
-            negozio3.setOrario("9:00-18:00");
+            negozio3.setVia("Via Santa Lucia,22");
+            negozio3.setCitta("Teramo");
+            negozio.setNotizie(notizie);
             negozio3.setImmagineprofilo("negozio3.jpg");
-            negozio3 = negozioRepository.save(negozio3);
+            negozioRepository.save(negozio3);
 
 
             Negoziante marco = new Negoziante();
@@ -84,6 +78,7 @@ public class ShopzoneServerApplication {
             fabio.setNegozio(negozio2);
             fabio = utenteRepository.save(fabio);
 
+
             Negoziante laura = new Negoziante();
             laura.setUsername("laura");
             laura.setPassword(passwordEncoder.encode("laura"));
@@ -91,7 +86,7 @@ public class ShopzoneServerApplication {
             laura.setCognome("Gentile");
             laura.setEmail("laura.business@business.it");
             laura.setNegozio(negozio3);
-            laura = utenteRepository.save(laura);
+            utenteRepository.save(laura);
 
 
             Utente stefano = new Utente();
@@ -100,11 +95,9 @@ public class ShopzoneServerApplication {
             stefano.setNome("Stefano");
             stefano.setCognome("Tassoni");
             stefano.setEmail("stefano.tassato@professional.it");
-            stefano = utenteRepository.save(stefano);
+            utenteRepository.save(stefano);
 
-            Set<Utente> piace = new HashSet<>();
-            piace.add(marco);
-            piace.add(fabio);
+
             for (int i = 0; i < 10; i++) {
                 Notizia notizia = new Notizia();
                 notizia.setTitolo("Pellentesque habitant morbi tristique senectus " + i);
@@ -112,24 +105,45 @@ public class ShopzoneServerApplication {
                 Date dataPubblicazione = new Date(System.currentTimeMillis() - (i * 86400000));
                 notizia.setDataPubblicazione(dataPubblicazione);
                 notizia.setImmagine("image" + i + ".jpg");
+
                 double rnd = Math.random();
                 if (rnd < 0.3) {
-                    notizia.setPubblicatoDa(negozio);
+
+                    negozio.addNotizia(notizia);
+
                 } else {
                     if (rnd < 0.6) {
-                        notizia.setPubblicatoDa(negozio2);
-                    }
-                    else{
-                        notizia.setPubblicatoDa(negozio3);
+                        negozio2.addNotizia(notizia);
+                    } else {
+                        negozio3.addNotizia(notizia);
                     }
 
                 }
 
-                notizia.setUtentePiace(piace);
                 notiziaRepository.save(notizia);
+
             }
+
+            negozio.addPreferenzaUtente(stefano);
+            negozio.addPreferenzaUtente(laura);
+            negozio2.addPreferenzaUtente(stefano);
+            utenteRepository.save(stefano);
+            utenteRepository.save(laura);
+
+            System.out.println(stefano.getNegoziPreferiti());
+            System.out.println(negozio.getPreferiti());
+            negozioRepository.save(negozio2);
+
+
+            negozio.removePreferenzaUtente(stefano);
+
+
+
+            System.out.println(negozio.getPreferiti());
+            System.out.println(stefano.getNegoziPreferiti());
 
         };
     }
+
 
 }

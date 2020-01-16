@@ -19,8 +19,6 @@ public interface ShopzoneServerService {
 
 	List<Notizia> findAllNotizie() throws BusinessException;
 
-	List<Notizia> findNotiziePreferite(Negozio id_negozio) throws BusinessException;
-
 	Notizia findNotiziaById(Long id) throws BusinessException;
 
 	Negozio findNegozioById(Long id) throws BusinessException;
@@ -29,4 +27,5 @@ public interface ShopzoneServerService {
 
 	Notizia nuovaNotizia(NuovanotiziaRequest nuovanotiziaRequest)throws BusinessException;
 
+    List<Notizia> findAllNotiziePreferite(Utente utente)throws BusinessException;
 }

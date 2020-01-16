@@ -1,11 +1,10 @@
 package ShopzoneServer.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.internal.util.compare.ComparableComparator;
+
+import javax.persistence.*;
+import java.util.*;
+
 
 @Entity
 @Table(name = "negozio")
@@ -18,8 +17,11 @@ public class Negozio {
 
 
 
-    @Column(name = "LUOGO", nullable = false, length = 255)
-    private String luogo;
+    @Column(name = "CITTA", nullable = false, length = 255)
+    private String citta;
+
+    @Column(name = "VIA", nullable = false, length = 255)
+    private String via;
 
     @Column(name = "NOME", nullable = false, length = 255)
     private String nome;
@@ -27,28 +29,27 @@ public class Negozio {
     @Column(name = "DESCRIZIONE", nullable = false, length = 255)
     private String descrizione;
 
-    @Column(name = "ORARIO", nullable = false, length = 255)
-    private String orario;
-
-    @Column(name = "CATEGORIA", nullable = false, length = 255)
-    private String categoria;
-
-    @Column(name = "GIORNIAPERTURA", nullable = false, length = 255)
-    private String giorniapertura;
-
-    @Column(name = "PIVA", nullable = false, length = 255)
-    private String piva;
-
 
     @Column(name = "IMMAGINEPROFILO", nullable = false, length = 255)
     private String immagineprofilo;
 
-    public String getImmagineprofilo() {
-        return immagineprofilo;
+    @ManyToMany
+    @JoinTable(
+            name = "UTENTE_NEGOZIO_PREFERITO",
+            joinColumns = @JoinColumn(name = "ID_NEGOZIO"),
+            inverseJoinColumns = @JoinColumn(name = "ID_UTENTE")
+    )
+    private Set<Utente> preferiti = new HashSet<Utente>();
+
+    @OneToMany(cascade =CascadeType.ALL, mappedBy = "negozio", orphanRemoval = true)
+    private List<Notizia> notizie = new LinkedList<Notizia>();
+
+    public List<Notizia> getNotizie() {
+        return notizie;
     }
 
-    public void setImmagineprofilo(String immagineprofilo) {
-        this.immagineprofilo = immagineprofilo;
+    public void setNotizie(List<Notizia> notizie) {
+        this.notizie = notizie;
     }
 
     public Long getId() {
@@ -75,54 +76,74 @@ public class Negozio {
         this.descrizione = descrizione;
     }
 
-    public String getOrario() {
-        return orario;
+    public Set<Utente> getPreferiti() {
+        return preferiti;
     }
 
-    public void setOrario(String orario) {
-        this.orario = orario;
+    public void setPreferiti(Set<Utente> preferiti) {
+        this.preferiti = preferiti;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getCitta() {
+        return citta;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCitta(String citta) {
+        this.citta = citta;
     }
 
-    public String getGiorniapertura() {
-        return giorniapertura;
+    public void addPreferenzaUtente(Utente utente){
+        this.preferiti.add(utente);
+        utente.getNegoziPreferiti().add(this);
     }
 
-    public void setGiorniapertura(String giorniapertura) {
-        this.giorniapertura = giorniapertura;
+    public void removePreferenzaUtente(Utente utente){
+        this.preferiti.remove(utente);
+        utente.getNegoziPreferiti().remove(this);
     }
 
-    public String getPiva() {
-        return piva;
+    public String getImmagineprofilo() {
+        return immagineprofilo;
     }
 
-    public void setPiva(String piva) {
-        this.piva = piva;
+    public void setImmagineprofilo(String immagineprofilo) {
+        this.immagineprofilo = immagineprofilo;
     }
 
-    public String getLuogo() { return luogo; }
+    public void addNotizia(Notizia notizia){
+    notizie.add(notizia);
+    notizia.setNegozio(this);
+    }
 
-    public void setLuogo(String luogo) { this.luogo = luogo; }
+    public String getVia() {
+        return via;
+    }
+
+    public void setVia(String via) {
+        this.via = via;
+    }
+
 
     @Override
     public String toString() {
         return "Negozio{" +
                 "id=" + id +
-                ", luogo='" + luogo + '\'' +
-                ", nome='" + nome + '\'' +
-                ", descrizione='" + descrizione + '\'' +
-                ", orario='" + orario + '\'' +
-                ", categoria='" + categoria + '\'' +
-                ", giorniapertura='" + giorniapertura + '\'' +
-                ", piva='" + piva + '\'' +
-                ", immagineprofilo='" + immagineprofilo + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Negozio negozio = (Negozio) o;
+        return Objects.equals(id, negozio.id) &&
+                Objects.equals(citta, negozio.citta) &&
+                Objects.equals(via, negozio.via) &&
+                Objects.equals(nome, negozio.nome) &&
+                Objects.equals(descrizione, negozio.descrizione) &&
+                Objects.equals(immagineprofilo, negozio.immagineprofilo) &&
+                Objects.equals(preferiti, negozio.preferiti) &&
+                Objects.equals(notizie, negozio.notizie);
+    }
+
 }

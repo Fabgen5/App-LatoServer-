@@ -95,7 +95,7 @@ public class NotiziaResponse {
             this.dataPubblicazione = "Days ago";
         }
 
-        this.pubblicatoDa = notizia.getPubblicatoDa();
+        this.pubblicatoDa = notizia.getNegozio();
         this.numeroPiace = notizia.getId() * 13;
         if (rnd< 0.5 )
             this.piace = true;

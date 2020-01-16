@@ -1,18 +1,10 @@
 package ShopzoneServer.domain;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.*;
 
 @Entity
 @Table(name = "utenti")
@@ -42,6 +34,43 @@ public class Utente {
 	@Column(name = "EMAIL", nullable = false, length = 255)
 	private String email;
 
+
+	@ManyToMany
+	@JoinTable(name="UTENTE_NOTIZIA_PIACE",
+			joinColumns={@JoinColumn(name="ID_UTENTE")},
+			inverseJoinColumns={@JoinColumn(name="ID_NOTIZIA")})
+	private Set<Notizia> notiziepreferite = new HashSet<>();
+
+	@ManyToMany(mappedBy = "preferiti")
+	private Set<Negozio> negoziPreferiti = new HashSet<Negozio>();
+
+	public Set<Negozio> getNegoziPreferiti() {
+		return negoziPreferiti;
+	}
+
+	public void setNegoziPreferiti(Set<Negozio> negoziPreferiti) {
+		this.negoziPreferiti = negoziPreferiti;
+	}
+
+
+	public Set<Notizia> getNotiziepreferite() {
+		return notiziepreferite;
+	}
+
+	public void setNotiziepreferite(Set<Notizia> notiziepreferite) {
+		this.notiziepreferite = notiziepreferite;
+	}
+
+	public void addNotiziaPreferita(Notizia notizia){
+		this.notiziepreferite.add(notizia);
+		notizia.getPiace().add(this);
+	}
+
+	public void removeNotiziaPreferita(Notizia notizia){
+		this.notiziepreferite.remove(notizia);
+		notizia.getPiace().remove(this);
+	}
+
 	@Override
 	public String toString() {
 		return "Utente{" +
@@ -57,6 +86,7 @@ public class Utente {
 	public Long getId() {
 		return id;
 	}
+
 
 	public void setId(Long id) {
 		this.id = id;
@@ -101,5 +131,21 @@ public class Utente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Utente utente = (Utente) o;
+		return Objects.equals(id, utente.id) &&
+				Objects.equals(nome, utente.nome) &&
+				Objects.equals(cognome, utente.cognome) &&
+				Objects.equals(username, utente.username) &&
+				Objects.equals(password, utente.password) &&
+				Objects.equals(email, utente.email) &&
+				Objects.equals(notiziepreferite, utente.notiziepreferite) &&
+				Objects.equals(negoziPreferiti, utente.negoziPreferiti);
+	}
+
 
 }

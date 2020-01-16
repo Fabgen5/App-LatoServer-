@@ -1,6 +1,7 @@
 package ShopzoneServer.api;
 
 import ShopzoneServer.domain.Negoziante;
+import ShopzoneServer.domain.Negozio;
 import ShopzoneServer.domain.Utente;
 
 public class UtenteResponse {

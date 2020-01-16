@@ -23,30 +23,29 @@ public class RESTNotizieController {
     private ShopzoneServerService service;
 
     @GetMapping
-   public List<NotiziaResponse> list() {
+    public List<NotiziaResponse> list() {
         List<Notizia> notizie = service.findAllNotizie();
         ArrayList<NotiziaResponse> notizieResponse = new ArrayList<>();
-        for(Notizia notizia: notizie){
-               notizieResponse.add(new NotiziaResponse(notizia));
+        for (Notizia notizia : notizie) {
+            notizieResponse.add(new NotiziaResponse(notizia));
         }
-        return notizieResponse ;
+        return notizieResponse;
     }
 
     @PostMapping("/aggiungi")
-    public NotiziaResponse nuovaNotizia(@RequestBody NuovanotiziaRequest nuovanotiziaRequest, HttpServletResponse response) {
+    public Notizia nuovaNotizia(@RequestBody NuovanotiziaRequest nuovanotiziaRequest) {
         System.out.println("sono qui");
         Notizia nuovaNotizia = service.nuovaNotizia(nuovanotiziaRequest);
-        System.out.println(nuovaNotizia);
-        return new NotiziaResponse(nuovaNotizia);
+        return nuovaNotizia;
     }
 
     @PostMapping
-    public List<Negozio>  findByLuogo(@RequestBody String luogo, HttpServletResponse response) {
+    public List<Negozio> findByLuogo(@RequestBody String luogo, HttpServletResponse response) {
 
 
         List<Negozio> negozi = service.findAllNegozioByLuogo(luogo);
         ArrayList<NegozioResponse> negozioResponse = new ArrayList<>();
-        for(Negozio negozio: negozi){
+        for (Negozio negozio : negozi) {
             negozioResponse.add(new NegozioResponse(negozio));
         }
         return service.findAllNegozioByLuogo(luogo);
@@ -57,4 +56,18 @@ public class RESTNotizieController {
         return new NotiziaResponse(service.findNotiziaById(id));
     }
 
+
+    @GetMapping("/preferiti")
+    public List<NotiziaResponse> listaPreferiti() {
+        Utente utente = Utility.getUtente();
+        List<Notizia> notizie = service.findAllNotiziePreferite(utente);
+        ArrayList<NotiziaResponse> notizieResponse = new ArrayList<>();
+        for (Notizia notizia : notizie) {
+            notizieResponse.add(new NotiziaResponse(notizia));
+        }
+        return notizieResponse;
+    }
+
 }
+
+

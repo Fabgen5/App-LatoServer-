@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface NotiziaRepository extends JpaRepository<Notizia, Long>{
 
-    List<Notizia> findByPubblicatoDa(Negozio negozio);
+    List<Notizia> findByNegozio(Negozio negozio);
 }
