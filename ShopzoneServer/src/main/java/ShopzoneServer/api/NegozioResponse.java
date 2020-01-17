@@ -1,6 +1,7 @@
 package ShopzoneServer.api;
 
 import ShopzoneServer.domain.Negozio;
+import ShopzoneServer.domain.Utente;
 
 public class NegozioResponse {
 
@@ -11,6 +12,7 @@ public class NegozioResponse {
     private String via;
     private String immagineprofilo;
     private int preferenze;
+    private boolean preferito;
 
 
     public Long getId() {
@@ -69,6 +71,14 @@ public class NegozioResponse {
         this.preferenze = preferenze;
     }
 
+    public boolean isPreferito() {
+        return preferito;
+    }
+
+    public void setPreferito(boolean preferito) {
+        this.preferito = preferito;
+    }
+
     public NegozioResponse(Negozio negozio) {
         this.id = negozio.getId();
         this.nome = negozio.getNome();
@@ -77,5 +87,16 @@ public class NegozioResponse {
         this.via = negozio.getVia();
         this.immagineprofilo = negozio.getImmagineprofilo();
         this.preferenze = negozio.getPreferiti().size();
+    }
+
+    public NegozioResponse(Negozio negozio, Utente utente) {
+        this.id = negozio.getId();
+        this.nome = negozio.getNome();
+        this.descrizione = negozio.getDescrizione();
+        this.citta = negozio.getCitta();
+        this.via = negozio.getVia();
+        this.immagineprofilo = negozio.getImmagineprofilo();
+        this.preferenze = negozio.getPreferiti().size();
+        this.preferito=negozio.getPreferiti().contains(utente);
     }
 }

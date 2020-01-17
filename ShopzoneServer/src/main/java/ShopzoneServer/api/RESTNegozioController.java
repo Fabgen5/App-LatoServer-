@@ -3,13 +3,8 @@ package ShopzoneServer.api;
 
 import ShopzoneServer.common.Utility;
 import ShopzoneServer.domain.Negozio;
-import ShopzoneServer.domain.Notizia;
 import ShopzoneServer.domain.Utente;
-import com.sun.org.apache.xpath.internal.operations.Neg;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -24,11 +19,22 @@ import java.util.List;
 public class RESTNegozioController {
 
     @Autowired
-    private ShopzoneServerService shopzoneServerService;
+    private ShopzoneServerService service;
+
+
+    @GetMapping
+    public List<NegozioResponse> findByLuogo(@RequestParam String citta){
+        List<Negozio> negozi = service.findAllNegozioByLuogo(citta);
+        ArrayList<NegozioResponse> negozioResponse = new ArrayList<>();
+        for (Negozio negozio : negozi) {
+            negozioResponse.add(new NegozioResponse(negozio));
+        }
+        return negozioResponse;
+    }
 
     @GetMapping("/{id}")
     public Negozio findById(@PathVariable Long id) {
-        return shopzoneServerService.findNegozioById(id);
+        return service.findNegozioById(id);
     }
 
     @PostMapping("/nuovo")
@@ -36,7 +42,7 @@ public class RESTNegozioController {
         Utente utente= Utility.getUtente();
         System.out.println(utente);
 
-        Negozio nuovoNegozio = shopzoneServerService.nuovoNegozio(nuovoNegozioRequest);
+        Negozio nuovoNegozio = service.nuovoNegozio(nuovoNegozioRequest);
 
         return nuovoNegozio;
     }
@@ -44,10 +50,10 @@ public class RESTNegozioController {
     @GetMapping("/preferiti")
     public List<NegozioResponse> listaPreferiti() {
         Utente utente = Utility.getUtente();
-        List<Negozio> negozi = shopzoneServerService.findAllNegoziPreferiti(utente);
+        List<Negozio> negozi = service.findAllNegoziPreferiti(utente);
         ArrayList<NegozioResponse> negozioResponse = new ArrayList<>();
         for ( Negozio negozio : negozi ) {
-            negozioResponse.add(new NegozioResponse(negozio));
+            negozioResponse.add(new NegozioResponse(negozio,utente));
         }
         return negozioResponse;
     }

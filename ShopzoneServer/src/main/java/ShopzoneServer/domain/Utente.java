@@ -41,7 +41,7 @@ public class Utente {
 			inverseJoinColumns={@JoinColumn(name="ID_NOTIZIA")})
 	private Set<Notizia> notiziepreferite = new HashSet<>();
 
-	@ManyToMany(mappedBy = "preferiti")
+	@ManyToMany(fetch=FetchType.EAGER,mappedBy = "preferiti")
 	private Set<Negozio> negoziPreferiti = new HashSet<Negozio>();
 
 	public Set<Negozio> getNegoziPreferiti() {
@@ -141,11 +141,11 @@ public class Utente {
 				Objects.equals(nome, utente.nome) &&
 				Objects.equals(cognome, utente.cognome) &&
 				Objects.equals(username, utente.username) &&
-				Objects.equals(password, utente.password) &&
-				Objects.equals(email, utente.email) &&
-				Objects.equals(notiziepreferite, utente.notiziepreferite) &&
-				Objects.equals(negoziPreferiti, utente.negoziPreferiti);
+				Objects.equals(email, utente.email) ;
 	}
 
-
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, nome, cognome, username, email);
+	}
 }

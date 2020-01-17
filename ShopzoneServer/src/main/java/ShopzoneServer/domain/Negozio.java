@@ -33,7 +33,7 @@ public class Negozio {
     @Column(name = "IMMAGINEPROFILO", nullable = false, length = 255)
     private String immagineprofilo;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
             name = "UTENTE_NEGOZIO_PREFERITO",
             joinColumns = @JoinColumn(name = "ID_NEGOZIO"),
@@ -141,9 +141,11 @@ public class Negozio {
                 Objects.equals(via, negozio.via) &&
                 Objects.equals(nome, negozio.nome) &&
                 Objects.equals(descrizione, negozio.descrizione) &&
-                Objects.equals(immagineprofilo, negozio.immagineprofilo) &&
-                Objects.equals(preferiti, negozio.preferiti) &&
-                Objects.equals(notizie, negozio.notizie);
+                Objects.equals(immagineprofilo, negozio.immagineprofilo);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, citta, via, nome, descrizione, immagineprofilo);
+    }
 }

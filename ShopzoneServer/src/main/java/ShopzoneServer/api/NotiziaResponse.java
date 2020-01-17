@@ -2,8 +2,11 @@ package ShopzoneServer.api;
 
 import ShopzoneServer.domain.Negozio;
 import ShopzoneServer.domain.Notizia;
+import ShopzoneServer.domain.Utente;
 
-import java.util.Date;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+
 
 public class NotiziaResponse {
 
@@ -12,8 +15,8 @@ public class NotiziaResponse {
     private String decrizione;
     private String immagine;
     private String dataPubblicazione;
-    private Negozio pubblicatoDa;
-    private Long numeroPiace;
+    private String pubblicatoDa;
+    private int numeroPiace;
     private boolean piace;
 
     public Long getId() {
@@ -56,19 +59,20 @@ public class NotiziaResponse {
         this.dataPubblicazione = dataPubblicazione;
     }
 
-    public Negozio getPubblicatoDa() {
+
+    public String getPubblicatoDa() {
         return pubblicatoDa;
     }
 
-    public void setPubblicatoDa(Negozio pubblicatoDa) {
+    public void setPubblicatoDa(String pubblicatoDa) {
         this.pubblicatoDa = pubblicatoDa;
     }
 
-    public Long getNumeroPiace() {
+    public int getNumeroPiace() {
         return numeroPiace;
     }
 
-    public void setNumeroPiace(Long numeroPiace) {
+    public void setNumeroPiace(int numeroPiace) {
         this.numeroPiace = numeroPiace;
     }
 
@@ -80,27 +84,25 @@ public class NotiziaResponse {
         this.piace = piace;
     }
 
-
     public NotiziaResponse(Notizia notizia) {
         this.id = notizia.getId();
         this.titolo = notizia.getTitolo();
         this.decrizione = notizia.getDescrizione();
         this.immagine = notizia.getImmagine();
-        Date date = new Date();
-        double rnd= Math.random();
-        if(rnd< 0.5 ){
-
-            this.dataPubblicazione = "Today";
-        }else{
-            this.dataPubblicazione = "Days ago";
-        }
-
-        this.pubblicatoDa = notizia.getNegozio();
-        this.numeroPiace = notizia.getId() * 13;
-        if (rnd< 0.5 )
-            this.piace = true;
-        else {
-            this.piace = false;
-        }
+        Format formatter = new SimpleDateFormat("dd-MM-yyyy");
+        this.dataPubblicazione = formatter.format(notizia.getDataPubblicazione());
+        this.pubblicatoDa = notizia.getNegozio().getNome();
+        this.numeroPiace = notizia.getPiace().size();
     }
+
+    public NotiziaResponse(Notizia notizia, Utente utente) {
+        this.id = notizia.getId();
+        this.titolo = notizia.getTitolo();
+        this.decrizione = notizia.getDescrizione();
+        this.immagine = notizia.getImmagine();
+        Format formatter = new SimpleDateFormat("dd-MM-yyyy");
+        this.dataPubblicazione = formatter.format(notizia.getDataPubblicazione());
+        this.pubblicatoDa = notizia.getNegozio().getNome();
+        this.numeroPiace = notizia.getPiace().size();
+        this.piace=notizia.getPiace().contains(utente); }
 }

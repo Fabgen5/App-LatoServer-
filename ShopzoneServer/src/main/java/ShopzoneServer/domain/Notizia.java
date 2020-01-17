@@ -23,6 +23,7 @@ public class Notizia {
     @Column(name = "DESCRIZIONE", nullable = false, length = 255)
     private String descrizione;
 
+
     @Column(name = "IMMAGINE", length = 255)
     private String immagine;
 
@@ -94,6 +95,19 @@ public class Notizia {
     public void setPiace(Set<Utente> piace) {
         this.piace = piace;
     }
+
+    public void addPiace(Utente utente) {
+
+        this.piace.add(utente);
+        utente.getNotiziepreferite().add(this);
+    }
+
+    public void removePiace(Utente utente) {
+
+        this.piace.add(utente);
+        utente.getNotiziepreferite().add(this);
+    }
+    
 
     @Override
     public String toString() {

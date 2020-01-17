@@ -67,7 +67,7 @@ public class ShopzoneServerApplication {
             marco.setCognome("Autili");
             marco.setEmail("marco.mengoni@gaio.it");
             marco.setNegozio(negozio);
-            marco = utenteRepository.save(marco);
+            utenteRepository.save(marco);
 
             Negoziante fabio = new Negoziante();
             fabio.setUsername("fabio");
@@ -76,7 +76,7 @@ public class ShopzoneServerApplication {
             fabio.setCognome("Gentile");
             fabio.setEmail("fabio.quartararo@business.it");
             fabio.setNegozio(negozio2);
-            fabio = utenteRepository.save(fabio);
+            utenteRepository.save(fabio);
 
 
             Negoziante laura = new Negoziante();
@@ -108,13 +108,19 @@ public class ShopzoneServerApplication {
 
                 double rnd = Math.random();
                 if (rnd < 0.3) {
-
+notizia.addPiace(stefano);
                     negozio.addNotizia(notizia);
 
                 } else {
                     if (rnd < 0.6) {
+                        notizia.addPiace(stefano);
+                        notizia.addPiace(laura);
+                        notizia.addPiace(marco);
+                        notizia.addPiace(fabio);
                         negozio2.addNotizia(notizia);
                     } else {
+                        notizia.addPiace(stefano);
+                        notizia.addPiace(laura);
                         negozio3.addNotizia(notizia);
                     }
 
@@ -126,13 +132,16 @@ public class ShopzoneServerApplication {
 
             negozio.addPreferenzaUtente(stefano);
             negozio.addPreferenzaUtente(laura);
+
             negozio2.addPreferenzaUtente(stefano);
             utenteRepository.save(stefano);
             utenteRepository.save(laura);
-
+            utenteRepository.save(marco);
+            utenteRepository.save(fabio);
             System.out.println(stefano.getNegoziPreferiti());
             System.out.println(negozio.getPreferiti());
             negozioRepository.save(negozio2);
+            negozioRepository.save(negozio);
 
 
             negozio.removePreferenzaUtente(stefano);

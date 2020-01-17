@@ -2,7 +2,9 @@ package ShopzoneServer.business.impl;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import ShopzoneServer.api.NuovanotiziaRequest;
 import ShopzoneServer.api.NuovoNegozioRequest;
@@ -41,8 +43,8 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 		return utenteRepository.findByUsername(username);
 	}
 	@Override
-	public List<Negozio> findAllNegozioByLuogo(String luogo) throws BusinessException {
-		return negozioRepository.findByCitta(luogo);
+	public List<Negozio> findAllNegozioByLuogo(String citta) throws BusinessException {
+		return negozioRepository.findByCitta(citta);
 	}
 
 	@Override
@@ -52,8 +54,9 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 
 	@Override
 	public List<Negozio> findAllNegoziPreferiti(Utente utente) throws BusinessException {
-
-		return (List<Negozio>) utente.getNegoziPreferiti();
+		Set<Negozio> set = utente.getNegoziPreferiti();
+		ArrayList<Negozio> negozi = new ArrayList<>(set);
+		return negozi;
 	}
 
 
