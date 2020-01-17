@@ -9,8 +9,6 @@ import java.util.*;
 @Entity
 @Table(name = "utenti")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TIPOLOGIA_UTENTE", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("utente")
 public class Utente {
 
 	@Id
@@ -44,44 +42,20 @@ public class Utente {
 	@ManyToMany(fetch=FetchType.EAGER,mappedBy = "preferiti")
 	private Set<Negozio> negoziPreferiti = new HashSet<Negozio>();
 
-	public Set<Negozio> getNegoziPreferiti() {
-		return negoziPreferiti;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_NEGOZIO", nullable = true)
+	private Negozio negozio;
+
+	public Negozio getNegozio() {
+		return negozio;
 	}
 
-	public void setNegoziPreferiti(Set<Negozio> negoziPreferiti) {
-		this.negoziPreferiti = negoziPreferiti;
+	public void setNegozio(Negozio negozio) {
+		this.negozio = negozio;
 	}
+	
 
-
-	public Set<Notizia> getNotiziepreferite() {
-		return notiziepreferite;
-	}
-
-	public void setNotiziepreferite(Set<Notizia> notiziepreferite) {
-		this.notiziepreferite = notiziepreferite;
-	}
-
-	public void addNotiziaPreferita(Notizia notizia){
-		this.notiziepreferite.add(notizia);
-		notizia.getPiace().add(this);
-	}
-
-	public void removeNotiziaPreferita(Notizia notizia){
-		this.notiziepreferite.remove(notizia);
-		notizia.getPiace().remove(this);
-	}
-
-	@Override
-	public String toString() {
-		return "Utente{" +
-				"id=" + id +
-				", nome='" + nome + '\'' +
-				", cognome='" + cognome + '\'' +
-				", username='" + username + '\'' +
-				", password='" + password + '\'' +
-				", email='" + email + '\'' +
-				'}';
-	}
 
 	public Long getId() {
 		return id;
@@ -130,6 +104,47 @@ public class Utente {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+	public Set<Negozio> getNegoziPreferiti() {
+		return negoziPreferiti;
+	}
+
+	public void setNegoziPreferiti(Set<Negozio> negoziPreferiti) {
+		this.negoziPreferiti = negoziPreferiti;
+	}
+
+
+	public Set<Notizia> getNotiziepreferite() {
+		return notiziepreferite;
+	}
+
+	public void setNotiziepreferite(Set<Notizia> notiziepreferite) {
+		this.notiziepreferite = notiziepreferite;
+	}
+
+	public void addNotiziaPreferita(Notizia notizia){
+		this.notiziepreferite.add(notizia);
+		notizia.getPiace().add(this);
+	}
+
+	public void removeNotiziaPreferita(Notizia notizia){
+		this.notiziepreferite.remove(notizia);
+		notizia.getPiace().remove(this);
+	}
+
+
+	@Override
+	public String toString() {
+		return "Utente{" +
+				"id=" + id +
+				", nome='" + nome + '\'' +
+				", cognome='" + cognome + '\'' +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", email='" + email + '\'' +
+				'}';
 	}
 
 	@Override

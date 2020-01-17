@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 
-import ShopzoneServer.common.spring.security.GrantedAuthorityImpl;
-import ShopzoneServer.domain.Negoziante;
 import ShopzoneServer.domain.Utente;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -56,7 +54,7 @@ public class UserDetailsImpl implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> result = new ArrayList<>();
 
-		if (utente instanceof Negoziante) {
+		if (utente.getNegozio() != null) {
 			GrantedAuthorityImpl authorityImpl = new GrantedAuthorityImpl("negoziante");
 			result.add(authorityImpl);
 		} else {

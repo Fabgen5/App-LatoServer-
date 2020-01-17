@@ -10,10 +10,9 @@ public class NegozioResponse {
     private String descrizione;
     private String citta;
     private String via;
-    private String immagineprofilo;
+    private byte[] immagineprofilo;
     private int preferenze;
     private boolean preferito;
-
 
     public Long getId() {
         return id;
@@ -55,11 +54,11 @@ public class NegozioResponse {
         this.via = via;
     }
 
-    public String getImmagineprofilo() {
+    public byte[] getImmagineprofilo() {
         return immagineprofilo;
     }
 
-    public void setImmagineprofilo(String immagineprofilo) {
+    public void setImmagineprofilo(byte[] immagineprofilo) {
         this.immagineprofilo = immagineprofilo;
     }
 

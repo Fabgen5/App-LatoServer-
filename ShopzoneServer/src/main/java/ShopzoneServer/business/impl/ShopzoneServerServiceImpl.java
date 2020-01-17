@@ -6,11 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import ShopzoneServer.api.NuovanotiziaRequest;
-import ShopzoneServer.api.NuovoNegozioRequest;
 import ShopzoneServer.api.RegistrazioneRequest;
 import ShopzoneServer.business.impl.repositories.*;
-import ShopzoneServer.common.Utility;
 import ShopzoneServer.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort.Direction;
@@ -89,30 +86,45 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	}
 
 	@Override
-	public Negozio nuovoNegozio(NuovoNegozioRequest nuovoNegozioRequest) throws BusinessException{
-		Negozio nuovo = new Negozio();
-		nuovo.setNome(nuovoNegozioRequest.getNome());
-		nuovo.setDescrizione(nuovoNegozioRequest.getDescrizione());
-		nuovo.setImmagineprofilo(nuovoNegozioRequest.getImmagine());
-		//nuovo.setCitta(nuovoNegozioRequest.getCitta());
-		//nuovo.setVia(nuovoNegozioRequest.setVia());
-
-		negozioRepository.save(nuovo);
-		return nuovo;
+	public Negozio nuovoNegozio(Negozio nuovoNegozio, Utente utente) throws BusinessException{
+		utente.setNegozio(nuovoNegozio);
+		negozioRepository.save(nuovoNegozio);
+		utenteRepository.save(utente);
+		return nuovoNegozio;
 	}
 
 	@Override
-	public Notizia nuovaNotizia(NuovanotiziaRequest nuovanotiziaRequest)throws BusinessException{
-		Notizia nuova = new Notizia();
-		nuova.setTitolo(nuovanotiziaRequest.getTitolo());
-		nuova.setDescrizione(nuovanotiziaRequest.getDescrizione());
-		nuova.setDataPubblicazione(Timestamp.valueOf(LocalDateTime.now()));
-		nuova.setImmagine("image1.jpg");
-		//nuova.setPubblicatoDa(nuovanotiziaRequest.getId_negozio());
-		notiziaRepository.save(nuova);
-		return nuova;
+	public void modificaNegozio(Negozio negozio) throws BusinessException {
+		negozioRepository.save(negozio);
+	}
+
+	@Override
+	public void eliminaNegozio(long idNegozio, Utente utente) throws BusinessException {
+		utente.setNegozio(null);
+		utenteRepository.save(utente);
+		negozioRepository.deleteById(idNegozio);
+
 	}
 
 
+	@Override
+	public Notizia nuovaNotizia(Notizia notizia, Negozio negozio)throws BusinessException{
+		notizia.setDataPubblicazione(Timestamp.valueOf(LocalDateTime.now()));
+		notizia.setNegozio(negozio);
+		notiziaRepository.save(notizia);
+		return notizia;
+	}
 
+	@Override
+	public void modificaNotizia(Notizia notizia) throws BusinessException {
+		notiziaRepository.save(notizia);
+	}
+
+	@Override
+	public void eliminaNotizia(long idNotizia, Negozio negozio) throws BusinessException {
+		Notizia notizia = notiziaRepository.findById(idNotizia).get();
+		negozio.getNotizie().remove(notizia);
+		negozioRepository.save(negozio);
+		notiziaRepository.deleteById(idNotizia);
+	}
 }

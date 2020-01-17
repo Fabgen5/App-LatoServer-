@@ -2,14 +2,13 @@ package ShopzoneServer.business;
 
 import java.util.List;
 
-import ShopzoneServer.api.NuovanotiziaRequest;
-import ShopzoneServer.api.NuovoNegozioRequest;
 import ShopzoneServer.api.RegistrazioneRequest;
 import ShopzoneServer.domain.*;
+import com.sun.org.apache.xpath.internal.operations.Neg;
 
 public interface ShopzoneServerService {
 
-	Negozio nuovoNegozio(NuovoNegozioRequest nuovoNegozioRequest) throws BusinessException;
+
 
 	Utente findUtenteByUsername(String username) throws BusinessException;
 
@@ -25,7 +24,17 @@ public interface ShopzoneServerService {
 
 	List<Negozio> findAllNegozioByLuogo(String luogo) throws BusinessException;
 
-	Notizia nuovaNotizia(NuovanotiziaRequest nuovanotiziaRequest)throws BusinessException;
+	Notizia nuovaNotizia(Notizia notizia, Negozio negozio)throws BusinessException;
 
     List<Negozio> findAllNegoziPreferiti(Utente utente)throws BusinessException;
+
+	Negozio nuovoNegozio(Negozio nuovoNegozio, Utente utente) throws BusinessException;
+
+	void eliminaNegozio(long idNegozio , Utente utente) throws BusinessException;
+
+	void modificaNegozio(Negozio negozio)throws BusinessException;
+
+	void eliminaNotizia(long idNotizia, Negozio negozio) throws BusinessException;
+
+	void modificaNotizia(Notizia notizia)throws BusinessException;
 }

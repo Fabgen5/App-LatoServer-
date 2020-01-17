@@ -9,7 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.management.StandardEmitterMBean;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.*;
 
 @SpringBootApplication
@@ -34,9 +35,14 @@ public class ShopzoneServerApplication {
             negozio.setDescrizione("Freeway");
             negozio.setCitta("Teramo");
             negozio.setVia("Via Madonna degli Angeli, 8");
-            negozio.setImmagineprofilo("Negozio0.jpg");
-            List<Notizia> notizie= new LinkedList<Notizia>() ;
-            negozio.setNotizie(notizie);
+           // negozio.setImmagineprofilo("Negozio0.jpg");
+            File file = new File("C:\\Users\\fabge\\Desktop\\Server\\Server\\ShopzoneServer\\Immagini-DB\\Logofreeway.jpg");
+            byte[] picInBytes = new byte[(int) file.length()];
+            FileInputStream fileInputStream = new FileInputStream(file);
+            fileInputStream.read(picInBytes);
+            fileInputStream.close();
+            negozio.setImmagineprofilo(picInBytes);
+
             negozioRepository.save(negozio);
 
 
@@ -45,8 +51,8 @@ public class ShopzoneServerApplication {
             negozio2.setDescrizione("Abbigliamento uomo donna, orario continuato");
             negozio2.setCitta("Pescara");
             negozio2.setVia("Via Pettino, 8");
-            negozio.setNotizie(notizie);
-            negozio2.setImmagineprofilo("Negozio2.jpg");
+            negozio2.setImmagineprofilo(picInBytes);
+           // negozio2.setImmagineprofilo("Negozio2.jpg");
             negozioRepository.save(negozio2);
 
 
@@ -55,12 +61,12 @@ public class ShopzoneServerApplication {
             negozio3.setDescrizione("Stardust2 dal 2010");
             negozio3.setVia("Via Santa Lucia,22");
             negozio3.setCitta("Teramo");
-            negozio.setNotizie(notizie);
-            negozio3.setImmagineprofilo("negozio3.jpg");
+            negozio3.setImmagineprofilo(picInBytes);
+          //  negozio3.setImmagineprofilo("negozio3.jpg");
             negozioRepository.save(negozio3);
 
 
-            Negoziante marco = new Negoziante();
+            Utente marco = new Utente();
             marco.setUsername("marco");
             marco.setPassword(passwordEncoder.encode("marco"));
             marco.setNome("Marco");
@@ -69,7 +75,7 @@ public class ShopzoneServerApplication {
             marco.setNegozio(negozio);
             utenteRepository.save(marco);
 
-            Negoziante fabio = new Negoziante();
+            Utente fabio = new Utente();
             fabio.setUsername("fabio");
             fabio.setPassword(passwordEncoder.encode("fabio"));
             fabio.setNome("Fabio");
@@ -79,7 +85,7 @@ public class ShopzoneServerApplication {
             utenteRepository.save(fabio);
 
 
-            Negoziante laura = new Negoziante();
+            Utente laura = new Utente();
             laura.setUsername("laura");
             laura.setPassword(passwordEncoder.encode("laura"));
             laura.setNome("Laura");
@@ -108,7 +114,7 @@ public class ShopzoneServerApplication {
 
                 double rnd = Math.random();
                 if (rnd < 0.3) {
-notizia.addPiace(stefano);
+                notizia.addPiace(stefano);
                     negozio.addNotizia(notizia);
 
                 } else {
@@ -134,7 +140,7 @@ notizia.addPiace(stefano);
             negozio.addPreferenzaUtente(laura);
 
             negozio2.addPreferenzaUtente(stefano);
-            utenteRepository.save(stefano);
+
             utenteRepository.save(laura);
             utenteRepository.save(marco);
             utenteRepository.save(fabio);
@@ -150,6 +156,10 @@ notizia.addPiace(stefano);
 
             System.out.println(negozio.getPreferiti());
             System.out.println(stefano.getNegoziPreferiti());
+
+            stefano.setNegozio(negozio);
+            utenteRepository.save(stefano);
+            System.out.println(stefano.getNegozio());
 
         };
     }

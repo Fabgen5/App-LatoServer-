@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ShopzoneServer.common.Utility;
+import ShopzoneServer.domain.Negozio;
 import ShopzoneServer.domain.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +22,10 @@ public class RESTNotizieController {
 
     @GetMapping
     public List<NotiziaResponse> list() {
+        List<Notizia> notizie = service.findAllNotizie();
+        ArrayList<NotiziaResponse> notizieResponse = new ArrayList<>();
         try{
            Utente utente= Utility.getUtente();
-            List<Notizia> notizie = service.findAllNotizie();
-            ArrayList<NotiziaResponse> notizieResponse = new ArrayList<>();
             for (Notizia notizia : notizie) {
                 notizieResponse.add(new NotiziaResponse(notizia,utente));
             }
@@ -32,8 +33,7 @@ public class RESTNotizieController {
         }
         catch(Exception e){
             System.out.println(e);
-            List<Notizia> notizie = service.findAllNotizie();
-            ArrayList<NotiziaResponse> notizieResponse = new ArrayList<>();
+
             for (Notizia notizia : notizie) {
                 notizieResponse.add(new NotiziaResponse(notizia));
             }
@@ -43,9 +43,9 @@ public class RESTNotizieController {
     }
 
     @PostMapping("/aggiungi")
-    public Notizia nuovaNotizia(@RequestBody NuovanotiziaRequest nuovanotiziaRequest) {
-        System.out.println("sono qui");
-        Notizia nuovaNotizia = service.nuovaNotizia(nuovanotiziaRequest);
+    public Notizia nuovaNotizia(@RequestBody Notizia notizia) {
+        Negozio negozio = Utility.getUtente().getNegozio();
+        Notizia nuovaNotizia = service.nuovaNotizia(notizia,negozio);
         return nuovaNotizia;
     }
 
@@ -54,7 +54,16 @@ public class RESTNotizieController {
         return new NotiziaResponse(service.findNotiziaById(id));
     }
 
+    @DeleteMapping("/{id}")
+    public void eliminaNotizia(@PathVariable long idNotizia ) {
+        Negozio negozio = Utility.getUtente().getNegozio();
+        service.eliminaNotizia(idNotizia , negozio);
+    }
 
+    @PutMapping
+    public void modificaNotizia(@RequestBody Notizia notizia) {
+        service.modificaNotizia(notizia);
+    }
 
 }
 

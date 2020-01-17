@@ -26,10 +26,25 @@ public class RESTNegozioController {
     public List<NegozioResponse> findByLuogo(@RequestParam String citta){
         List<Negozio> negozi = service.findAllNegozioByLuogo(citta);
         ArrayList<NegozioResponse> negozioResponse = new ArrayList<>();
-        for (Negozio negozio : negozi) {
-            negozioResponse.add(new NegozioResponse(negozio));
+
+        try{
+            Utente utente= Utility.getUtente();
+            for (Negozio negozio : negozi) {
+                negozioResponse.add(new NegozioResponse(negozio, utente));
+            }
+            return negozioResponse;
         }
-        return negozioResponse;
+        catch(Exception e){
+            System.out.println(e);
+            for (Negozio negozio : negozi) {
+                negozioResponse.add(new NegozioResponse(negozio));
+            }
+            return negozioResponse;
+        }
+
+
+
+
     }
 
     @GetMapping("/{id}")
@@ -38,13 +53,10 @@ public class RESTNegozioController {
     }
 
     @PostMapping("/nuovo")
-    public Negozio nuovoNegozio(@RequestBody NuovoNegozioRequest nuovoNegozioRequest, HttpServletResponse response) {
+    public Negozio nuovoNegozio(@RequestBody Negozio nuovoNegozio, HttpServletResponse response) {
         Utente utente= Utility.getUtente();
-        System.out.println(utente);
-
-        Negozio nuovoNegozio = service.nuovoNegozio(nuovoNegozioRequest);
-
-        return nuovoNegozio;
+        Negozio negozio = service.nuovoNegozio(nuovoNegozio,utente);
+        return negozio;
     }
 
     @GetMapping("/preferiti")

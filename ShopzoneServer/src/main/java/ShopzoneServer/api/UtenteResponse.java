@@ -1,7 +1,5 @@
 package ShopzoneServer.api;
 
-import ShopzoneServer.domain.Negoziante;
-import ShopzoneServer.domain.Negozio;
 import ShopzoneServer.domain.Utente;
 
 public class UtenteResponse {
@@ -17,7 +15,7 @@ public class UtenteResponse {
 		this.cognome = utente.getCognome();
 		this.username = utente.getUsername();
 		this.email = utente.getEmail();
-		if (utente instanceof Negoziante) {
+		if (utente.getNegozio() != null) {
 			this.ruolo = "negoziante";
 		} else {
 			this.ruolo = "base";

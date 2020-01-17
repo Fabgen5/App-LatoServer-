@@ -16,7 +16,6 @@ public class Negozio {
     private Long id;
 
 
-
     @Column(name = "CITTA", nullable = false, length = 255)
     private String citta;
 
@@ -29,11 +28,11 @@ public class Negozio {
     @Column(name = "DESCRIZIONE", nullable = false, length = 255)
     private String descrizione;
 
+    @Lob
+    @Column(name = "IMMAGINEPROFILO", nullable = false)
+    private byte[] immagineprofilo;
 
-    @Column(name = "IMMAGINEPROFILO", nullable = false, length = 255)
-    private String immagineprofilo;
-
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "UTENTE_NEGOZIO_PREFERITO",
             joinColumns = @JoinColumn(name = "ID_NEGOZIO"),
@@ -41,18 +40,12 @@ public class Negozio {
     )
     private Set<Utente> preferiti = new HashSet<Utente>();
 
-    @OneToMany(cascade =CascadeType.ALL, mappedBy = "negozio", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "negozio", orphanRemoval = true)
     private List<Notizia> notizie = new LinkedList<Notizia>();
 
-    public List<Notizia> getNotizie() {
-        return notizie;
-    }
 
-    public void setNotizie(List<Notizia> notizie) {
-        this.notizie = notizie;
-    }
 
-    public Long getId() {
+     public Long getId() {
         return id;
     }
 
@@ -76,14 +69,6 @@ public class Negozio {
         this.descrizione = descrizione;
     }
 
-    public Set<Utente> getPreferiti() {
-        return preferiti;
-    }
-
-    public void setPreferiti(Set<Utente> preferiti) {
-        this.preferiti = preferiti;
-    }
-
     public String getCitta() {
         return citta;
     }
@@ -92,27 +77,12 @@ public class Negozio {
         this.citta = citta;
     }
 
-    public void addPreferenzaUtente(Utente utente){
-        this.preferiti.add(utente);
-        utente.getNegoziPreferiti().add(this);
-    }
-
-    public void removePreferenzaUtente(Utente utente){
-        this.preferiti.remove(utente);
-        utente.getNegoziPreferiti().remove(this);
-    }
-
-    public String getImmagineprofilo() {
+    public byte[] getImmagineprofilo() {
         return immagineprofilo;
     }
 
-    public void setImmagineprofilo(String immagineprofilo) {
+    public void setImmagineprofilo(byte[] immagineprofilo) {
         this.immagineprofilo = immagineprofilo;
-    }
-
-    public void addNotizia(Notizia notizia){
-    notizie.add(notizia);
-    notizia.setNegozio(this);
     }
 
     public String getVia() {
@@ -123,6 +93,36 @@ public class Negozio {
         this.via = via;
     }
 
+    public List<Notizia> getNotizie() {
+        return notizie;
+    }
+
+    public void setNotizie(List<Notizia> notizie) {
+        this.notizie = notizie;
+    }
+
+    public Set<Utente> getPreferiti() {
+        return preferiti;
+    }
+
+    public void setPreferiti(Set<Utente> preferiti) {
+        this.preferiti = preferiti;
+    }
+
+    public void addPreferenzaUtente(Utente utente) {
+        this.preferiti.add(utente);
+        utente.getNegoziPreferiti().add(this);
+    }
+
+    public void removePreferenzaUtente(Utente utente) {
+        this.preferiti.remove(utente);
+        utente.getNegoziPreferiti().remove(this);
+    }
+
+    public void addNotizia(Notizia notizia) {
+        notizie.add(notizia);
+        notizia.setNegozio(this);
+    }
 
     @Override
     public String toString() {
