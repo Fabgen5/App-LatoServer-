@@ -48,8 +48,9 @@ public class RESTNegozioController {
     }
 
     @GetMapping("/{id}")
-    public Negozio findById(@PathVariable Long id) {
-        return service.findNegozioById(id);
+    public NegozioResponse findById(@PathVariable Long id) {
+        NegozioResponse negozioResponse= new  NegozioResponse(service.findNegozioById(id));
+        return negozioResponse;
     }
 
     @PostMapping("/nuovo")

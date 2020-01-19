@@ -36,7 +36,7 @@ public class ShopzoneServerApplication {
             negozio.setCitta("Teramo");
             negozio.setVia("Via Madonna degli Angeli, 8");
            // negozio.setImmagineprofilo("Negozio0.jpg");
-            File file = new File("C:\\Users\\fabge\\Desktop\\Server\\Server\\ShopzoneServer\\Immagini-DB\\Logofreeway.jpg");
+            File file = new File("Immagini-DB/Logofreeway.jpg");
             byte[] picInBytes = new byte[(int) file.length()];
             FileInputStream fileInputStream = new FileInputStream(file);
             fileInputStream.read(picInBytes);
@@ -110,7 +110,13 @@ public class ShopzoneServerApplication {
                 notizia.setDescrizione("Sconti di " + i + "% su tutta la collezione ");
                 Date dataPubblicazione = new Date(System.currentTimeMillis() - (i * 86400000));
                 notizia.setDataPubblicazione(dataPubblicazione);
-                notizia.setImmagine("image" + i + ".jpg");
+
+                File fileimmagine = new File("C:\\Users\\fabge\\Desktop\\Server\\Server\\ShopzoneServer\\Immagini-DB\\image" + i +".jpg");
+                byte[] immagineInBytes = new byte[(int) fileimmagine.length()];
+                FileInputStream fileInputStreamImmagini = new FileInputStream(fileimmagine);
+                fileInputStreamImmagini.read(immagineInBytes);
+                fileInputStreamImmagini.close();
+                notizia.setImmagine(immagineInBytes);
 
                 double rnd = Math.random();
                 if (rnd < 0.3) {

@@ -1,5 +1,7 @@
 package ShopzoneServer.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
@@ -23,9 +25,9 @@ public class Notizia {
     @Column(name = "DESCRIZIONE", nullable = false, length = 255)
     private String descrizione;
 
-
-    @Column(name = "IMMAGINE", length = 255)
-    private String immagine;
+    @Lob
+    @Column(name = "IMMAGINE")
+    private byte[] immagine;
 
 
     @Column(name = "DATA_PUBBLICAZIONE")
@@ -33,10 +35,11 @@ public class Notizia {
 
     @ManyToOne
     @JoinColumn(name = "ID_NEGOZIO", nullable = false)
+    @JsonBackReference
     private Negozio negozio;
 
 
-    @ManyToMany(mappedBy = "notiziepreferite")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "notiziePiaciute")
     private Set<Utente> piace = new HashSet<Utente>();
 
 
@@ -64,11 +67,11 @@ public class Notizia {
         this.descrizione = descrizione;
     }
 
-    public String getImmagine() {
+    public byte[] getImmagine() {
         return immagine;
     }
 
-    public void setImmagine(String immagine) {
+    public void setImmagine(byte[] immagine) {
         this.immagine = immagine;
     }
 
@@ -99,15 +102,15 @@ public class Notizia {
     public void addPiace(Utente utente) {
 
         this.piace.add(utente);
-        utente.getNotiziepreferite().add(this);
+        utente.getNotiziePiaciute().add(this);
     }
 
     public void removePiace(Utente utente) {
 
         this.piace.add(utente);
-        utente.getNotiziepreferite().add(this);
+        utente.getNotiziePiaciute().add(this);
     }
-    
+
 
     @Override
     public String toString() {

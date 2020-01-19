@@ -3,6 +3,8 @@ package ShopzoneServer.api;
 import ShopzoneServer.domain.Negozio;
 import ShopzoneServer.domain.Utente;
 
+import java.util.Base64;
+
 public class NegozioResponse {
 
     private Long id;
@@ -10,7 +12,7 @@ public class NegozioResponse {
     private String descrizione;
     private String citta;
     private String via;
-    private byte[] immagineprofilo;
+    private String immagineprofilo;
     private int preferenze;
     private boolean preferito;
 
@@ -54,11 +56,11 @@ public class NegozioResponse {
         this.via = via;
     }
 
-    public byte[] getImmagineprofilo() {
+    public String getImmagineprofilo() {
         return immagineprofilo;
     }
 
-    public void setImmagineprofilo(byte[] immagineprofilo) {
+    public void setImmagineprofilo(String immagineprofilo) {
         this.immagineprofilo = immagineprofilo;
     }
 
@@ -84,7 +86,9 @@ public class NegozioResponse {
         this.descrizione = negozio.getDescrizione();
         this.citta = negozio.getCitta();
         this.via = negozio.getVia();
-        this.immagineprofilo = negozio.getImmagineprofilo();
+
+        this.immagineprofilo = Base64.getEncoder().encodeToString( negozio.getImmagineprofilo());
+
         this.preferenze = negozio.getPreferiti().size();
     }
 
@@ -94,7 +98,7 @@ public class NegozioResponse {
         this.descrizione = negozio.getDescrizione();
         this.citta = negozio.getCitta();
         this.via = negozio.getVia();
-        this.immagineprofilo = negozio.getImmagineprofilo();
+        this.immagineprofilo = Base64.getEncoder().encodeToString( negozio.getImmagineprofilo());
         this.preferenze = negozio.getPreferiti().size();
         this.preferito=negozio.getPreferiti().contains(utente);
     }

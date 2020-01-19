@@ -1,11 +1,11 @@
 package ShopzoneServer.api;
 
-import ShopzoneServer.domain.Negozio;
 import ShopzoneServer.domain.Notizia;
 import ShopzoneServer.domain.Utente;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 
 
 public class NotiziaResponse {
@@ -15,7 +15,9 @@ public class NotiziaResponse {
     private String decrizione;
     private String immagine;
     private String dataPubblicazione;
-    private String pubblicatoDa;
+    private String nomeNegozio;
+    private long idNegozio;
+    private String immagineNegozio;
     private int numeroPiace;
     private boolean piace;
 
@@ -59,13 +61,28 @@ public class NotiziaResponse {
         this.dataPubblicazione = dataPubblicazione;
     }
 
-
-    public String getPubblicatoDa() {
-        return pubblicatoDa;
+    public String getNomeNegozio() {
+        return nomeNegozio;
     }
 
-    public void setPubblicatoDa(String pubblicatoDa) {
-        this.pubblicatoDa = pubblicatoDa;
+    public void setNomeNegozio(String nomeNegozio) {
+        this.nomeNegozio = nomeNegozio;
+    }
+
+    public long getIdNegozio() {
+        return idNegozio;
+    }
+
+    public void setIdNegozio(long idNegozio) {
+        this.idNegozio = idNegozio;
+    }
+
+    public String getImmagineNegozio() {
+        return immagineNegozio;
+    }
+
+    public void setImmagineNegozio(String immagineNegozio) {
+        this.immagineNegozio = immagineNegozio;
     }
 
     public int getNumeroPiace() {
@@ -88,10 +105,12 @@ public class NotiziaResponse {
         this.id = notizia.getId();
         this.titolo = notizia.getTitolo();
         this.decrizione = notizia.getDescrizione();
-        this.immagine = notizia.getImmagine();
+        this.immagine = Base64.getEncoder().encodeToString( notizia.getImmagine());
         Format formatter = new SimpleDateFormat("dd-MM-yyyy");
         this.dataPubblicazione = formatter.format(notizia.getDataPubblicazione());
-        this.pubblicatoDa = notizia.getNegozio().getNome();
+        this.nomeNegozio = notizia.getNegozio().getNome();
+        this.idNegozio= notizia.getNegozio().getId();
+        this.immagineNegozio = Base64.getEncoder().encodeToString( notizia.getNegozio().getImmagineprofilo());
         this.numeroPiace = notizia.getPiace().size();
     }
 
@@ -99,10 +118,12 @@ public class NotiziaResponse {
         this.id = notizia.getId();
         this.titolo = notizia.getTitolo();
         this.decrizione = notizia.getDescrizione();
-        this.immagine = notizia.getImmagine();
+        this.immagine =Base64.getEncoder().encodeToString(  notizia.getImmagine());
         Format formatter = new SimpleDateFormat("dd-MM-yyyy");
         this.dataPubblicazione = formatter.format(notizia.getDataPubblicazione());
-        this.pubblicatoDa = notizia.getNegozio().getNome();
+        this.nomeNegozio = notizia.getNegozio().getNome();
+        this.idNegozio= notizia.getNegozio().getId();
+        this.immagineNegozio = Base64.getEncoder().encodeToString( notizia.getNegozio().getImmagineprofilo());
         this.numeroPiace = notizia.getPiace().size();
         this.piace=notizia.getPiace().contains(utente); }
 }

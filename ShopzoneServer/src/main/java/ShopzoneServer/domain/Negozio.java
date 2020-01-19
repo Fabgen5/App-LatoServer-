@@ -1,5 +1,6 @@
 package ShopzoneServer.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.internal.util.compare.ComparableComparator;
 
 import javax.persistence.*;
@@ -40,7 +41,8 @@ public class Negozio {
     )
     private Set<Utente> preferiti = new HashSet<Utente>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "negozio", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "negozio", orphanRemoval = true)
+    @JsonManagedReference
     private List<Notizia> notizie = new LinkedList<Notizia>();
 
 

@@ -33,11 +33,11 @@ public class Utente {
 	private String email;
 
 
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.REMOVE,fetch=FetchType.EAGER)
 	@JoinTable(name="UTENTE_NOTIZIA_PIACE",
 			joinColumns={@JoinColumn(name="ID_UTENTE")},
 			inverseJoinColumns={@JoinColumn(name="ID_NOTIZIA")})
-	private Set<Notizia> notiziepreferite = new HashSet<>();
+	private Set<Notizia> notiziePiaciute = new HashSet<>();
 
 	@ManyToMany(fetch=FetchType.EAGER,mappedBy = "preferiti")
 	private Set<Negozio> negoziPreferiti = new HashSet<Negozio>();
@@ -116,21 +116,21 @@ public class Utente {
 	}
 
 
-	public Set<Notizia> getNotiziepreferite() {
-		return notiziepreferite;
+	public Set<Notizia> getNotiziePiaciute() {
+		return notiziePiaciute;
 	}
 
-	public void setNotiziepreferite(Set<Notizia> notiziepreferite) {
-		this.notiziepreferite = notiziepreferite;
+	public void setNotiziePiaciute(Set<Notizia> notiziePiaciute) {
+		this.notiziePiaciute = notiziePiaciute;
 	}
 
-	public void addNotiziaPreferita(Notizia notizia){
-		this.notiziepreferite.add(notizia);
+	public void addNotiziePiaciute(Notizia notizia){
+		this.notiziePiaciute.add(notizia);
 		notizia.getPiace().add(this);
 	}
 
 	public void removeNotiziaPreferita(Notizia notizia){
-		this.notiziepreferite.remove(notizia);
+		this.notiziePiaciute.remove(notizia);
 		notizia.getPiace().remove(this);
 	}
 
