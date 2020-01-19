@@ -37,4 +37,6 @@ public interface ShopzoneServerService {
 	void eliminaNotizia(long idNotizia, Negozio negozio) throws BusinessException;
 
 	void modificaNotizia(Notizia notizia)throws BusinessException;
+
+	void miPiace(Long idNotizia , int Piace, Utente utente) throws BusinessException;
 }

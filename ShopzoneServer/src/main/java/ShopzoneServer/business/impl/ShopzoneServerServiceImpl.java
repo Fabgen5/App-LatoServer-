@@ -127,4 +127,20 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 		negozioRepository.save(negozio);
 		notiziaRepository.deleteById(idNotizia);
 	}
+
+	@Override
+	public void miPiace(Long idNotizia , int piace, Utente utente) throws BusinessException{
+		if (piace == 0) {
+			Notizia notizia = notiziaRepository.findById(idNotizia).get();
+			utente.removeNotiziaPiaciuta(notizia);
+			utenteRepository.save(utente);
+			notiziaRepository.save(notizia);
+		}
+		else{
+			Notizia notizia = notiziaRepository.findById(idNotizia).get();
+			utente.addNotiziaPiaciuta(notizia);
+			utenteRepository.save(utente);
+			notiziaRepository.save(notizia);
+		}
+	}
 }

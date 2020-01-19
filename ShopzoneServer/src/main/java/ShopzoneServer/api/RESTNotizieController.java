@@ -42,6 +42,7 @@ public class RESTNotizieController {
 
     }
 
+
     @PostMapping("/aggiungi")
     public Notizia nuovaNotizia(@RequestBody Notizia notizia) {
         Negozio negozio = Utility.getUtente().getNegozio();
@@ -51,8 +52,21 @@ public class RESTNotizieController {
 
     @GetMapping("/{id}")
     public NotiziaResponse findById(@PathVariable Long id) {
-        return new NotiziaResponse(service.findNotiziaById(id));
+        try{
+            Utente utente= Utility.getUtente();
+            return new NotiziaResponse(service.findNotiziaById(id),utente);
+        }
+        catch(Exception e){
+            return new NotiziaResponse(service.findNotiziaById(id));
+        }
+
     }
+    @PutMapping("/{id}/{piace}")
+    public void miPiace(@PathVariable long id,@PathVariable int piace){
+        Utente utente= Utility.getUtente();
+        service.miPiace(id, piace, utente);
+    }
+
 
     @DeleteMapping("/{id}")
     public void eliminaNotizia(@PathVariable long idNotizia ) {

@@ -124,12 +124,12 @@ public class Utente {
 		this.notiziePiaciute = notiziePiaciute;
 	}
 
-	public void addNotiziePiaciute(Notizia notizia){
+	public void addNotiziaPiaciuta(Notizia notizia){
 		this.notiziePiaciute.add(notizia);
 		notizia.getPiace().add(this);
 	}
 
-	public void removeNotiziaPreferita(Notizia notizia){
+	public void removeNotiziaPiaciuta(Notizia notizia){
 		this.notiziePiaciute.remove(notizia);
 		notizia.getPiace().remove(this);
 	}
