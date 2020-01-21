@@ -12,7 +12,7 @@ public class NotiziaResponse {
 
     private Long id;
     private String titolo;
-    private String decrizione;
+    private String descrizione;
     private String immagine;
     private String dataPubblicazione;
     private String nomeNegozio;
@@ -37,12 +37,12 @@ public class NotiziaResponse {
         this.titolo = titolo;
     }
 
-    public String getDecrizione() {
-        return decrizione;
+    public String getDescrizione() {
+        return descrizione;
     }
 
-    public void setDecrizione(String decrizione) {
-        this.decrizione = decrizione;
+    public void setDescrizione(String decrizione) {
+        this.descrizione = descrizione;
     }
 
     public String getImmagine() {
@@ -104,7 +104,7 @@ public class NotiziaResponse {
     public NotiziaResponse(Notizia notizia) {
         this.id = notizia.getId();
         this.titolo = notizia.getTitolo();
-        this.decrizione = notizia.getDescrizione();
+        this.descrizione = notizia.getDescrizione();
         this.immagine = Base64.getEncoder().encodeToString( notizia.getImmagine());
         Format formatter = new SimpleDateFormat("dd-MM-yyyy");
         this.dataPubblicazione = formatter.format(notizia.getDataPubblicazione());
@@ -117,7 +117,7 @@ public class NotiziaResponse {
     public NotiziaResponse(Notizia notizia, Utente utente) {
         this.id = notizia.getId();
         this.titolo = notizia.getTitolo();
-        this.decrizione = notizia.getDescrizione();
+        this.descrizione = notizia.getDescrizione();
         this.immagine =Base64.getEncoder().encodeToString(notizia.getImmagine());
         Format formatter = new SimpleDateFormat("dd-MM-yyyy");
         this.dataPubblicazione = formatter.format(notizia.getDataPubblicazione());
