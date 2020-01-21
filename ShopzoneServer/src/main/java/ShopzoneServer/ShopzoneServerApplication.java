@@ -111,7 +111,7 @@ public class ShopzoneServerApplication {
                 Date dataPubblicazione = new Date(System.currentTimeMillis() - (i * 86400000));
                 notizia.setDataPubblicazione(dataPubblicazione);
 
-                File fileimmagine = new File("C:\\Users\\fabge\\Desktop\\Server\\Server\\ShopzoneServer\\Immagini-DB\\image" + i +".jpg");
+                File fileimmagine = new File("C:\\Users\\Laura\\Documents\\GitHub\\App-LatoServer-\\ShopzoneServer\\Immagini-DB\\image" + i +".jpg");
                 byte[] immagineInBytes = new byte[(int) fileimmagine.length()];
                 FileInputStream fileInputStreamImmagini = new FileInputStream(fileimmagine);
                 fileInputStreamImmagini.read(immagineInBytes);

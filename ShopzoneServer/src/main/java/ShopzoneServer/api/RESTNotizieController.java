@@ -44,10 +44,10 @@ public class RESTNotizieController {
 
 
     @PostMapping("/aggiungi")
-    public Notizia nuovaNotizia(@RequestBody Notizia notizia) {
+    public NotiziaResponse nuovaNotizia(@RequestBody NotiziaRequest notizia) {
         Negozio negozio = Utility.getUtente().getNegozio();
         Notizia nuovaNotizia = service.nuovaNotizia(notizia,negozio);
-        return nuovaNotizia;
+        return new NotiziaResponse(nuovaNotizia);
     }
 
     @GetMapping("/{id}")

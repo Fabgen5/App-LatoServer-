@@ -118,7 +118,7 @@ public class NotiziaResponse {
         this.id = notizia.getId();
         this.titolo = notizia.getTitolo();
         this.decrizione = notizia.getDescrizione();
-        this.immagine =Base64.getEncoder().encodeToString(  notizia.getImmagine());
+        this.immagine =Base64.getEncoder().encodeToString(notizia.getImmagine());
         Format formatter = new SimpleDateFormat("dd-MM-yyyy");
         this.dataPubblicazione = formatter.format(notizia.getDataPubblicazione());
         this.nomeNegozio = notizia.getNegozio().getNome();

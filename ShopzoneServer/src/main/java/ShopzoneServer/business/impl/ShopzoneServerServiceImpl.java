@@ -3,9 +3,12 @@ package ShopzoneServer.business.impl;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 
+import ShopzoneServer.api.NotiziaRequest;
+import ShopzoneServer.api.NotiziaResponse;
 import ShopzoneServer.api.RegistrazioneRequest;
 import ShopzoneServer.business.impl.repositories.*;
 import ShopzoneServer.domain.*;
@@ -108,11 +111,15 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 
 
 	@Override
-	public Notizia nuovaNotizia(Notizia notizia, Negozio negozio)throws BusinessException{
-		notizia.setDataPubblicazione(Timestamp.valueOf(LocalDateTime.now()));
-		notizia.setNegozio(negozio);
-		notiziaRepository.save(notizia);
-		return notizia;
+	public Notizia nuovaNotizia(NotiziaRequest notizia, Negozio negozio)throws BusinessException{
+		Notizia nuova = new Notizia();
+		nuova.setDataPubblicazione(Timestamp.valueOf(LocalDateTime.now()));
+		nuova.setNegozio(negozio);
+		nuova.setImmagine(Base64.getDecoder().decode(notizia.getImmagine()));
+		nuova.setTitolo(notizia.getTitolo());
+		nuova.setDescrizione(notizia.getDescrizione());
+		notiziaRepository.save(nuova);
+		return nuova;
 	}
 
 	@Override
