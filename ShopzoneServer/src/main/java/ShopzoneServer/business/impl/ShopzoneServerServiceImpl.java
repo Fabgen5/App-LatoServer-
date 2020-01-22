@@ -139,9 +139,10 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	public void miPiace(Long idNotizia , int piace, Utente utente) throws BusinessException{
 		if (piace == 0) {
 			Notizia notizia = notiziaRepository.findById(idNotizia).get();
+			System.out.println(notizia.getPiace());
 			utente.removeNotiziaPiaciuta(notizia);
+			System.out.println(notizia.getPiace());
 			utenteRepository.save(utente);
-			notiziaRepository.save(notizia);
 		}
 		else{
 			Notizia notizia = notiziaRepository.findById(idNotizia).get();

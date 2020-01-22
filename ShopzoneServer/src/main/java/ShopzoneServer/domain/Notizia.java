@@ -30,7 +30,7 @@ public class Notizia {
     private byte[] immagine;
 
 
-    @Column(name = "DATA_PUBBLICAZIONE")
+        @Column(name = "DATA_PUBBLICAZIONE")
     private Date dataPubblicazione;
 
     @ManyToOne
@@ -39,7 +39,7 @@ public class Notizia {
     private Negozio negozio;
 
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "notiziePiaciute")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "notiziePiaciute")
     private Set<Utente> piace = new HashSet<Utente>();
 
 
@@ -100,15 +100,14 @@ public class Notizia {
     }
 
     public void addPiace(Utente utente) {
-
         this.piace.add(utente);
         utente.getNotiziePiaciute().add(this);
     }
 
     public void removePiace(Utente utente) {
 
-        this.piace.add(utente);
-        utente.getNotiziePiaciute().add(this);
+        this.piace.remove(utente);
+       // utente.getNotiziePiaciute().remove(this);
     }
 
 

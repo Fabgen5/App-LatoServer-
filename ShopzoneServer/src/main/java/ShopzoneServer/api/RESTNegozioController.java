@@ -42,9 +42,6 @@ public class RESTNegozioController {
             return negozioResponse;
         }
 
-
-
-
     }
 
     @GetMapping("/{id}")
@@ -52,6 +49,15 @@ public class RESTNegozioController {
         NegozioResponse negozioResponse= new  NegozioResponse(service.findNegozioById(id));
         return negozioResponse;
     }
+
+    @GetMapping("/home")
+    public NegozioResponse home() {
+        Long id = Utility.getUtente().getNegozio().getId();
+        NegozioResponse negozioResponse= new  NegozioResponse(service.findNegozioById(id));
+        return negozioResponse;
+    }
+
+
 
     @PostMapping("/nuovo")
     public Negozio nuovoNegozio(@RequestBody Negozio nuovoNegozio, HttpServletResponse response) {
