@@ -48,9 +48,20 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	}
 
 	@Override
+	public List<Notizia> findAllNotizieNegozio(Long id) throws BusinessException {
+		Negozio negozio = negozioRepository.findById(id).get();
+		return negozio.getNotizie();
+	}
+
+
+
+	@Override
 	public List<Notizia> findAllNotizie() throws BusinessException {
 		return notiziaRepository.findAll(JpaSort.unsafe(Direction.DESC, "dataPubblicazione"));
 	}
+
+
+
 
 	@Override
 	public List<Negozio> findAllNegoziPreferiti(Utente utente) throws BusinessException {

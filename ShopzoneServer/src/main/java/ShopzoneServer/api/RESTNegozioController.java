@@ -3,6 +3,7 @@ package ShopzoneServer.api;
 
 import ShopzoneServer.common.Utility;
 import ShopzoneServer.domain.Negozio;
+import ShopzoneServer.domain.Notizia;
 import ShopzoneServer.domain.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,18 +24,17 @@ public class RESTNegozioController {
 
 
     @GetMapping
-    public List<NegozioResponse> findByLuogo(@RequestParam String citta){
+    public List<NegozioResponse> findByLuogo(@RequestParam String citta) {
         List<Negozio> negozi = service.findAllNegozioByLuogo(citta);
         ArrayList<NegozioResponse> negozioResponse = new ArrayList<>();
 
-        try{
-            Utente utente= Utility.getUtente();
+        try {
+            Utente utente = Utility.getUtente();
             for (Negozio negozio : negozi) {
                 negozioResponse.add(new NegozioResponse(negozio, utente));
             }
             return negozioResponse;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             for (Negozio negozio : negozi) {
                 negozioResponse.add(new NegozioResponse(negozio));
@@ -46,23 +46,35 @@ public class RESTNegozioController {
 
     @GetMapping("/{id}")
     public NegozioResponse findById(@PathVariable Long id) {
-        NegozioResponse negozioResponse= new  NegozioResponse(service.findNegozioById(id));
+        NegozioResponse negozioResponse = new NegozioResponse(service.findNegozioById(id));
         return negozioResponse;
     }
+
+    @GetMapping("/{id}/notizie")
+    public List<NotiziaResponse> list(@PathVariable Long id) {
+        List<Notizia> notizie = service.findAllNotizieNegozio( id);
+        ArrayList<NotiziaResponse> notizieResponse = new ArrayList<>();
+
+        Utente utente = Utility.getUtente();
+        for (Notizia notizia : notizie) {
+            notizieResponse.add(new NotiziaResponse(notizia, utente));
+        }
+        return notizieResponse;
+    }
+
 
     @GetMapping("/home")
     public NegozioResponse home() {
         Long id = Utility.getUtente().getNegozio().getId();
-        NegozioResponse negozioResponse= new  NegozioResponse(service.findNegozioById(id));
+        NegozioResponse negozioResponse = new NegozioResponse(service.findNegozioById(id));
         return negozioResponse;
     }
 
 
-
     @PostMapping("/nuovo")
     public Negozio nuovoNegozio(@RequestBody Negozio nuovoNegozio, HttpServletResponse response) {
-        Utente utente= Utility.getUtente();
-        Negozio negozio = service.nuovoNegozio(nuovoNegozio,utente);
+        Utente utente = Utility.getUtente();
+        Negozio negozio = service.nuovoNegozio(nuovoNegozio, utente);
         return negozio;
     }
 
@@ -71,8 +83,8 @@ public class RESTNegozioController {
         Utente utente = Utility.getUtente();
         List<Negozio> negozi = service.findAllNegoziPreferiti(utente);
         ArrayList<NegozioResponse> negozioResponse = new ArrayList<>();
-        for ( Negozio negozio : negozi ) {
-            negozioResponse.add(new NegozioResponse(negozio,utente));
+        for (Negozio negozio : negozi) {
+            negozioResponse.add(new NegozioResponse(negozio, utente));
         }
         return negozioResponse;
     }
