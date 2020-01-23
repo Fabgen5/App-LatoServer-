@@ -155,18 +155,6 @@ public class ShopzoneServerApplication {
             negozioRepository.save(negozio2);
             negozioRepository.save(negozio);
 
-
-            negozio.removePreferenzaUtente(stefano);
-
-
-
-            System.out.println(negozio.getPreferiti());
-            System.out.println(stefano.getNegoziPreferiti());
-
-            stefano.setNegozio(negozio);
-            utenteRepository.save(stefano);
-            System.out.println(stefano.getNegozio());
-
         };
     }
 

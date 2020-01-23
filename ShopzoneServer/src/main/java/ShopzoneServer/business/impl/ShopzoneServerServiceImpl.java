@@ -7,6 +7,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 
+import ShopzoneServer.api.NegozioRequest;
 import ShopzoneServer.api.NotiziaRequest;
 import ShopzoneServer.api.NotiziaResponse;
 import ShopzoneServer.api.RegistrazioneRequest;
@@ -100,11 +101,17 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	}
 
 	@Override
-	public Negozio nuovoNegozio(Negozio nuovoNegozio, Utente utente) throws BusinessException{
-		utente.setNegozio(nuovoNegozio);
-		negozioRepository.save(nuovoNegozio);
+	public Negozio nuovoNegozio(NegozioRequest nuovoNegozio, Utente utente) throws BusinessException{
+		Negozio nuovo = new Negozio();
+		nuovo.setNome(nuovoNegozio.getNome());
+		nuovo.setDescrizione(nuovoNegozio.getDescrizione());
+		nuovo.setCitta(nuovoNegozio.getCitta());
+		nuovo.setVia(nuovoNegozio.getVia());
+		nuovo.setImmagineprofilo(Base64.getDecoder().decode(nuovoNegozio.getImmagineprofilo()));
+		negozioRepository.save(nuovo);
+		utente.setNegozio(nuovo);
 		utenteRepository.save(utente);
-		return nuovoNegozio;
+		return nuovo;
 	}
 
 	@Override

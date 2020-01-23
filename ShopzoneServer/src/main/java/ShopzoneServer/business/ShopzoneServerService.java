@@ -2,6 +2,7 @@ package ShopzoneServer.business;
 
 import java.util.List;
 
+import ShopzoneServer.api.NegozioRequest;
 import ShopzoneServer.api.NotiziaRequest;
 import ShopzoneServer.api.NotiziaResponse;
 import ShopzoneServer.api.RegistrazioneRequest;
@@ -31,7 +32,7 @@ public interface ShopzoneServerService {
 
     List<Negozio> findAllNegoziPreferiti(Utente utente) throws BusinessException;
 
-    Negozio nuovoNegozio(Negozio nuovoNegozio, Utente utente) throws BusinessException;
+    Negozio nuovoNegozio(NegozioRequest nuovoNegozio, Utente utente) throws BusinessException;
 
     void eliminaNegozio(long idNegozio, Utente utente) throws BusinessException;
 

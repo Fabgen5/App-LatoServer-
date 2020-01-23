@@ -71,11 +71,11 @@ public class RESTNegozioController {
     }
 
 
-    @PostMapping("/nuovo")
-    public Negozio nuovoNegozio(@RequestBody Negozio nuovoNegozio, HttpServletResponse response) {
-        Utente utente = Utility.getUtente();
-        Negozio negozio = service.nuovoNegozio(nuovoNegozio, utente);
-        return negozio;
+    @PostMapping("/aggiungi")
+    public NegozioResponse nuovoNegozio(@RequestBody NegozioRequest nuovoNegozio) {
+        Utente utente= Utility.getUtente();
+        Negozio negozio = service.nuovoNegozio(nuovoNegozio,utente);
+        return new NegozioResponse(negozio);
     }
 
     @GetMapping("/preferiti")
