@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import ShopzoneServer.business.ShopzoneServerService;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +48,7 @@ public class RESTNegozioController {
         NegozioResponse negozioResponse = new NegozioResponse(service.findNegozioById(id));
         return negozioResponse;
     }
-    
+
     @PostMapping("/aggiungi")
     public NegozioResponse nuovoNegozio(@RequestBody NegozioRequest nuovoNegozio) {
         Utente utente= Utility.getUtente();
