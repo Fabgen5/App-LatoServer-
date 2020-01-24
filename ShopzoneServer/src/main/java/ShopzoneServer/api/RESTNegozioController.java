@@ -49,15 +49,7 @@ public class RESTNegozioController {
         NegozioResponse negozioResponse = new NegozioResponse(service.findNegozioById(id));
         return negozioResponse;
     }
-
-
-    @PostMapping("/nuovo")
-    public Negozio nuovoNegozio(@RequestBody NegozioRequest nuovoNegozio, HttpServletResponse response) {
-        Utente utente = Utility.getUtente();
-        Negozio negozio = service.nuovoNegozio(nuovoNegozio, utente);
-        return negozio;
-    }
-
+    
     @PostMapping("/aggiungi")
     public NegozioResponse nuovoNegozio(@RequestBody NegozioRequest nuovoNegozio) {
         Utente utente= Utility.getUtente();
