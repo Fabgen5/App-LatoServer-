@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import ShopzoneServer.business.ShopzoneServerService;
 import ShopzoneServer.domain.Notizia;
 
-import javax.rmi.CORBA.Util;
-
 
 @RestController
 @RequestMapping("/api/notizie")
@@ -25,22 +23,7 @@ public class RESTNotizieController {
     @GetMapping
     public List<NotiziaResponse> list() {
         List<Notizia> notizie = service.findAllNotizie();
-        ArrayList<NotiziaResponse> notizieResponse = new ArrayList<>();
-        try{
-           Utente utente= Utility.getUtente();
-            for (Notizia notizia : notizie) {
-                notizieResponse.add(new NotiziaResponse(notizia,utente));
-            }
-            return notizieResponse;
-        }
-        catch(Exception e){
-            System.out.println(e);
-
-            for (Notizia notizia : notizie) {
-                notizieResponse.add(new NotiziaResponse(notizia));
-            }
-            return notizieResponse;
-        }
+        return Utility.notiziaResponse(notizie);
 
     }
 
@@ -63,7 +46,6 @@ public class RESTNotizieController {
         }
 
     }
-
     @PutMapping("/{id}/{piace}")
     public void miPiace(@PathVariable long id,@PathVariable int piace){
         Utente utente= Utility.getUtente();

@@ -15,11 +15,10 @@ public class NotiziaResponse {
     private String descrizione;
     private String immagine;
     private String dataPubblicazione;
-    private String nomeNegozio;
-    private long idNegozio;
-    private String immagineNegozio;
     private int numeroPiace;
     private boolean piace;
+    private NegozioResponse negozio;
+
 
     public Long getId() {
         return id;
@@ -61,28 +60,12 @@ public class NotiziaResponse {
         this.dataPubblicazione = dataPubblicazione;
     }
 
-    public String getNomeNegozio() {
-        return nomeNegozio;
+    public NegozioResponse getNegozioResponse() {
+        return negozio;
     }
 
-    public void setNomeNegozio(String nomeNegozio) {
-        this.nomeNegozio = nomeNegozio;
-    }
-
-    public long getIdNegozio() {
-        return idNegozio;
-    }
-
-    public void setIdNegozio(long idNegozio) {
-        this.idNegozio = idNegozio;
-    }
-
-    public String getImmagineNegozio() {
-        return immagineNegozio;
-    }
-
-    public void setImmagineNegozio(String immagineNegozio) {
-        this.immagineNegozio = immagineNegozio;
+    public void setNegozioResponse(NegozioResponse negozioResponse) {
+        this.negozio = negozioResponse;
     }
 
     public int getNumeroPiace() {
@@ -108,9 +91,8 @@ public class NotiziaResponse {
         this.immagine = Base64.getEncoder().encodeToString( notizia.getImmagine());
         Format formatter = new SimpleDateFormat("dd-MM-yyyy");
         this.dataPubblicazione = formatter.format(notizia.getDataPubblicazione());
-        this.nomeNegozio = notizia.getNegozio().getNome();
-        this.idNegozio= notizia.getNegozio().getId();
-        this.immagineNegozio = Base64.getEncoder().encodeToString( notizia.getNegozio().getImmagineprofilo());
+
+        this.setNegozioResponse(new NegozioResponse(notizia.getNegozio()));
         this.numeroPiace = notizia.getPiace().size();
     }
 
@@ -121,9 +103,10 @@ public class NotiziaResponse {
         this.immagine =Base64.getEncoder().encodeToString(notizia.getImmagine());
         Format formatter = new SimpleDateFormat("dd-MM-yyyy");
         this.dataPubblicazione = formatter.format(notizia.getDataPubblicazione());
-        this.nomeNegozio = notizia.getNegozio().getNome();
-        this.idNegozio= notizia.getNegozio().getId();
-        this.immagineNegozio = Base64.getEncoder().encodeToString( notizia.getNegozio().getImmagineprofilo());
+
+        this.setNegozioResponse(new NegozioResponse(notizia.getNegozio()));
+
+
         this.numeroPiace = notizia.getPiace().size();
         this.piace=notizia.getPiace().contains(utente); }
 }

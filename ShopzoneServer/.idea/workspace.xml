@@ -2,13 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82fc6159-3e9e-48e2-b700-b33035547fa8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/NegozioRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/ShopzoneServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/ShopzoneServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/NegozioResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/NegozioResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/NotiziaResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/NotiziaResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNegozioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNegozioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNotizieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNotizieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/ShopzoneServerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/ShopzoneServerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/impl/ShopzoneServerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/impl/ShopzoneServerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/UtenteResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/UtenteResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/common/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/common/Utility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Negozio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Negozio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/api/NegozioResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/api/NegozioResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/api/NotiziaResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/api/NotiziaResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/api/RESTNotizieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/api/RESTNotizieController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/api/UtenteResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/api/UtenteResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/common/Utility.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/common/Utility.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/domain/Negozio.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/domain/Negozio.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -26,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/business/impl/ShopzoneServerServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="113" column="21" lean-forward="true" selection-start-line="113" selection-start-column="21" selection-end-line="113" selection-end-column="21" />
+            <state relative-caret-position="1581">
+              <caret line="120" selection-start-line="120" selection-end-line="120" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -38,8 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/business/ShopzoneServerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="34" column="33" lean-forward="true" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+            <state relative-caret-position="476">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -50,11 +56,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNegozioController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
+            <state relative-caret-position="381">
+              <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/api/NegozioRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -122,16 +137,17 @@
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Notizia.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Utente.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/UtenteResponse.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNegozioController.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/ShopzoneServerService.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/impl/ShopzoneServerServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNegozioController.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-11" />
-    <option name="width" value="980" />
-    <option name="height" value="1031" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="951" />
+    <option name="y" value="-9" />
+    <option name="width" value="978" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -139,7 +155,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -214,7 +230,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -353,11 +369,12 @@
       <workItem from="1579696628292" duration="1903000" />
       <workItem from="1579704964459" duration="3037000" />
       <workItem from="1579734985700" duration="4303000" />
+      <workItem from="1579857317975" duration="228000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="208180000" />
+    <option name="totallyTimeSpent" value="208412000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -369,10 +386,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7407932" visible="true" weight="0.17165992" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7407932" visible="true" weight="0.23624161" />
       <window_info id="Structure" order="1" sideWeight="0.2592068" side_tool="true" weight="0.2536913" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -446,7 +463,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Preferenza.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTPreferitiController.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-jpa/2.1.8.RELEASE/spring-data-jpa-2.1.8.RELEASE.jar!/org/springframework/data/jpa/repository/JpaRepository.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -773,8 +789,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/business/impl/ShopzoneServerServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="113" column="21" lean-forward="true" selection-start-line="113" selection-start-column="21" selection-end-line="113" selection-end-column="21" />
+        <state relative-caret-position="1581">
+          <caret line="120" selection-start-line="120" selection-end-line="120" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -783,18 +799,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/business/ShopzoneServerService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="34" column="33" lean-forward="true" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+        <state relative-caret-position="476">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/api/NegozioRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNegozioController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
+        <state relative-caret-position="381">
+          <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

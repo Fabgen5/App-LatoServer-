@@ -26,21 +26,7 @@ public class RESTNegozioController {
     @GetMapping
     public List<NegozioResponse> findByLuogo(@RequestParam String citta) {
         List<Negozio> negozi = service.findAllNegozioByLuogo(citta);
-        ArrayList<NegozioResponse> negozioResponse = new ArrayList<>();
-
-        try {
-            Utente utente = Utility.getUtente();
-            for (Negozio negozio : negozi) {
-                negozioResponse.add(new NegozioResponse(negozio, utente));
-            }
-            return negozioResponse;
-        } catch (Exception e) {
-            System.out.println(e);
-            for (Negozio negozio : negozi) {
-                negozioResponse.add(new NegozioResponse(negozio));
-            }
-            return negozioResponse;
-        }
+        return Utility.negozioResponse(negozi);
 
     }
 
@@ -52,14 +38,8 @@ public class RESTNegozioController {
 
     @GetMapping("/{id}/notizie")
     public List<NotiziaResponse> list(@PathVariable Long id) {
-        List<Notizia> notizie = service.findAllNotizieNegozio( id);
-        ArrayList<NotiziaResponse> notizieResponse = new ArrayList<>();
-
-        Utente utente = Utility.getUtente();
-        for (Notizia notizia : notizie) {
-            notizieResponse.add(new NotiziaResponse(notizia, utente));
-        }
-        return notizieResponse;
+        List<Notizia> notizie = service.findAllNotizieNegozio(id);
+        return Utility.notiziaResponse(notizie);
     }
 
 
@@ -70,6 +50,13 @@ public class RESTNegozioController {
         return negozioResponse;
     }
 
+
+    @PostMapping("/nuovo")
+    public Negozio nuovoNegozio(@RequestBody NegozioRequest nuovoNegozio, HttpServletResponse response) {
+        Utente utente = Utility.getUtente();
+        Negozio negozio = service.nuovoNegozio(nuovoNegozio, utente);
+        return negozio;
+    }
 
     @PostMapping("/aggiungi")
     public NegozioResponse nuovoNegozio(@RequestBody NegozioRequest nuovoNegozio) {

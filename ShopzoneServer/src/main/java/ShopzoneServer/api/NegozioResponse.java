@@ -102,4 +102,5 @@ public class NegozioResponse {
         this.preferenze = negozio.getPreferiti().size();
         this.preferito=negozio.getPreferiti().contains(utente);
     }
+
 }

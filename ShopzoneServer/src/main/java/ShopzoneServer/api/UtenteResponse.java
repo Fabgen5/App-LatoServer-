@@ -9,7 +9,7 @@ public class UtenteResponse {
     private String cognome;
     private String email;
     private String ruolo;
-    private long idNegozio;
+    private NegozioResponse negozio;
 
 
     public UtenteResponse(Utente utente) {
@@ -19,7 +19,7 @@ public class UtenteResponse {
         this.email = utente.getEmail();
         if (utente.getNegozio() != null) {
             this.ruolo = "negoziante";
-            this.idNegozio = utente.getNegozio().getId();
+            this.negozio = new NegozioResponse(utente.getNegozio());
         } else {
             this.ruolo = "base";
         }
@@ -57,12 +57,12 @@ public class UtenteResponse {
         this.email = email;
     }
 
-    public long getIdNegozio() {
-        return idNegozio;
+    public NegozioResponse getNegozio() {
+        return negozio;
     }
 
-    public void setIdNegozio(long idNegozio) {
-        this.idNegozio = idNegozio;
+    public void setNegozio(NegozioResponse negozio) {
+        this.negozio = negozio;
     }
 
     public String getRuolo() {

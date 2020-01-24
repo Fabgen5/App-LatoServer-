@@ -130,6 +130,10 @@ public class Negozio {
     public String toString() {
         return "Negozio{" +
                 "id=" + id +
+                ", citta='" + citta + '\'' +
+                ", via='" + via + '\'' +
+                ", nome='" + nome + '\'' +
+                ", descrizione='" + descrizione + '\'' +
                 '}';
     }
 
