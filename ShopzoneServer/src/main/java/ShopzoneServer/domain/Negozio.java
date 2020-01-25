@@ -1,5 +1,6 @@
 package ShopzoneServer.domain;
 
+import ShopzoneServer.api.NegozioRequest;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.internal.util.compare.ComparableComparator;
 
@@ -33,7 +34,7 @@ public class Negozio {
     @Column(name = "IMMAGINEPROFILO", nullable = false)
     private byte[] immagineprofilo;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "UTENTE_NEGOZIO_PREFERITO",
             joinColumns = @JoinColumn(name = "ID_NEGOZIO"),
@@ -41,9 +42,9 @@ public class Negozio {
     )
     private Set<Utente> preferiti = new HashSet<Utente>();
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "negozio", orphanRemoval = true)
+    @OneToMany(mappedBy = "negozio")
     @JsonManagedReference
-    private List<Notizia> notizie = new LinkedList<Notizia>();
+    private Set<Notizia> notizie = new HashSet<Notizia>();
 
 
 
@@ -95,11 +96,11 @@ public class Negozio {
         this.via = via;
     }
 
-    public List<Notizia> getNotizie() {
+    public Set<Notizia> getNotizie() {
         return notizie;
     }
 
-    public void setNotizie(List<Notizia> notizie) {
+    public void setNotizie(Set<Notizia> notizie) {
         this.notizie = notizie;
     }
 
@@ -113,19 +114,15 @@ public class Negozio {
 
     public void addPreferenzaUtente(Utente utente) {
         this.preferiti.add(utente);
-        utente.getNegoziPreferiti().add(this);
+        //utente.getNegoziPreferiti().add(this);
     }
 
     public void removePreferenzaUtente(Utente utente) {
         this.preferiti.remove(utente);
-        utente.getNegoziPreferiti().remove(this);
+        //utente.getNegoziPreferiti().remove(this);
     }
 
-    public void addNotizia(Notizia notizia) {
-        notizie.add(notizia);
-        notizia.setNegozio(this);
-    }
-
+    /*
     @Override
     public String toString() {
         return "Negozio{" +
@@ -153,5 +150,17 @@ public class Negozio {
     @Override
     public int hashCode() {
         return Objects.hash(id, citta, via, nome, descrizione, immagineprofilo);
+    }
+*/
+
+    public Negozio(NegozioRequest nuovo) {
+        this.setNome(nuovo.getNome());
+        this.setDescrizione(nuovo.getDescrizione());
+        this.setCitta(nuovo.getCitta());
+        this.setVia(nuovo.getVia());
+        this.setImmagineprofilo(Base64.getDecoder().decode(nuovo.getImmagineprofilo()));
+    }
+
+    public Negozio() {
     }
 }

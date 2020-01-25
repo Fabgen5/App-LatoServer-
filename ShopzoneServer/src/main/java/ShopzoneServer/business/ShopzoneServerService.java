@@ -2,10 +2,7 @@ package ShopzoneServer.business;
 
 import java.util.List;
 
-import ShopzoneServer.api.NegozioRequest;
-import ShopzoneServer.api.NotiziaRequest;
-import ShopzoneServer.api.NotiziaResponse;
-import ShopzoneServer.api.RegistrazioneRequest;
+import ShopzoneServer.api.*;
 import ShopzoneServer.domain.*;
 import com.sun.org.apache.xpath.internal.operations.Neg;
 
@@ -36,11 +33,11 @@ public interface ShopzoneServerService {
 
     void eliminaNegozio(long idNegozio, Utente utente) throws BusinessException;
 
-    void modificaNegozio(Negozio negozio) throws BusinessException;
+    Negozio modificaNegozio(NegozioRequest negozio, Long negozioId) throws BusinessException;
 
     void eliminaNotizia(long idNotizia, Negozio negozio) throws BusinessException;
 
-    void modificaNotizia(Notizia notizia) throws BusinessException;
+    Notizia modificaNotizia(NotiziaRequest notizia, Long notiziaId) throws BusinessException;
 
     void miPiace(Long idNotizia, int Piace, Utente utente) throws BusinessException;
 }

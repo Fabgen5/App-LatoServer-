@@ -13,9 +13,11 @@ import ShopzoneServer.api.NotiziaResponse;
 import ShopzoneServer.api.RegistrazioneRequest;
 import ShopzoneServer.business.impl.repositories.*;
 import ShopzoneServer.domain.*;
+import jdk.management.resource.ResourceRequestDeniedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.JpaSort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,11 +52,8 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 
 	@Override
 	public List<Notizia> findAllNotizieNegozio(Long id) throws BusinessException {
-		Negozio negozio = negozioRepository.findById(id).get();
-		return negozio.getNotizie();
+		return notiziaRepository.findByNegozioId(id);
 	}
-
-
 
 	@Override
 	public List<Notizia> findAllNotizie() throws BusinessException {
@@ -102,12 +101,7 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 
 	@Override
 	public Negozio nuovoNegozio(NegozioRequest nuovoNegozio, Utente utente) throws BusinessException{
-		Negozio nuovo = new Negozio();
-		nuovo.setNome(nuovoNegozio.getNome());
-		nuovo.setDescrizione(nuovoNegozio.getDescrizione());
-		nuovo.setCitta(nuovoNegozio.getCitta());
-		nuovo.setVia(nuovoNegozio.getVia());
-		nuovo.setImmagineprofilo(Base64.getDecoder().decode(nuovoNegozio.getImmagineprofilo()));
+		Negozio nuovo = new Negozio(nuovoNegozio);
 		negozioRepository.save(nuovo);
 		utente.setNegozio(nuovo);
 		utenteRepository.save(utente);
@@ -115,8 +109,31 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	}
 
 	@Override
-	public void modificaNegozio(Negozio negozio) throws BusinessException {
-		negozioRepository.save(negozio);
+	public Negozio modificaNegozio(NegozioRequest negozioModificato, Long negozioId) throws BusinessException {
+		System.out.println("amleto=" + negozioId);
+		Negozio negozio = new Negozio();
+		negozio.setId(negozioId);
+		negozio.setNome(negozioModificato.getNome());
+		negozio.setDescrizione(negozioModificato.getDescrizione());
+		negozio.setCitta(negozioModificato.getCitta());
+		negozio.setVia(negozioModificato.getVia());
+		negozio.setImmagineprofilo(Base64.getDecoder().decode(negozioModificato.getImmagineprofilo()));
+		Negozio result =  negozioRepository.save(negozio);
+		System.out.println("strunz=" + result.getId());
+		return result;
+
+		/*
+		Negozio negozio = negozioRepository.findById(negozioId).get();
+		negozio.setId(negozioId);
+		negozio.setNome(negozioModificato.getNome());
+		negozio.setDescrizione(negozioModificato.getDescrizione());
+		negozio.setCitta(negozioModificato.getCitta());
+		negozio.setVia(negozioModificato.getVia());
+		negozio.setImmagineprofilo(Base64.getDecoder().decode(negozioModificato.getImmagineprofilo()));
+
+		return negozioRepository.save(negozio);
+		*/
+
 	}
 
 	@Override
@@ -141,8 +158,13 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	}
 
 	@Override
-	public void modificaNotizia(Notizia notizia) throws BusinessException {
-		notiziaRepository.save(notizia);
+	public Notizia modificaNotizia(NotiziaRequest notiziaModificata, Long notiziaId) throws BusinessException {
+		Notizia notizia = new Notizia();
+
+		notizia.setTitolo(notiziaModificata.getTitolo());
+		notizia.setDescrizione(notiziaModificata.getDescrizione());
+		notizia.setImmagine(Base64.getDecoder().decode(notiziaModificata.getImmagine()));
+		return notiziaRepository.save(notizia);
 	}
 
 	@Override

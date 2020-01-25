@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import ShopzoneServer.business.ShopzoneServerService;
 import ShopzoneServer.domain.Notizia;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/notizie")
@@ -59,9 +61,10 @@ public class RESTNotizieController {
         service.eliminaNotizia(idNotizia , negozio);
     }
 
-    @PutMapping
-    public void modificaNotizia(@RequestBody Notizia notizia) {
-        service.modificaNotizia(notizia);
+    @PutMapping("/aggiungi/{id}")
+    public NotiziaResponse modificaNotizia(@PathVariable(value= "id") Long notiziaId, @Valid @RequestBody NotiziaRequest notizia) {
+        Notizia notiziaModificata = service.modificaNotizia(notizia, notiziaId);
+        return new NotiziaResponse(notiziaModificata);
     }
 
 }

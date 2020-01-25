@@ -2,13 +2,11 @@ package ShopzoneServer.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import java.sql.Timestamp;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "notizie")
@@ -30,7 +28,7 @@ public class Notizia {
     private byte[] immagine;
 
 
-        @Column(name = "DATA_PUBBLICAZIONE")
+    @Column(name = "DATA_PUBBLICAZIONE")
     private Date dataPubblicazione;
 
     @ManyToOne
@@ -101,13 +99,13 @@ public class Notizia {
 
     public void addPiace(Utente utente) {
         this.piace.add(utente);
-        utente.getNotiziePiaciute().add(this);
+        //utente.getNotiziePiaciute().add(this);
     }
 
     public void removePiace(Utente utente) {
 
         this.piace.remove(utente);
-       // utente.getNotiziePiaciute().remove(this);
+        // utente.getNotiziePiaciute().remove(this);
     }
 
 

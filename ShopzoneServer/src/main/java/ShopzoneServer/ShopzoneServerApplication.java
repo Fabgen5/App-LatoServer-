@@ -43,7 +43,7 @@ public class ShopzoneServerApplication {
             fileInputStream.close();
             negozio.setImmagineprofilo(picInBytes);
 
-            negozioRepository.save(negozio);
+            negozio = negozioRepository.save(negozio);
 
 
             Negozio negozio2 = new Negozio();
@@ -53,7 +53,7 @@ public class ShopzoneServerApplication {
             negozio2.setVia("Via Pettino, 8");
             negozio2.setImmagineprofilo(picInBytes);
            // negozio2.setImmagineprofilo("Negozio2.jpg");
-            negozioRepository.save(negozio2);
+            negozio2 = negozioRepository.save(negozio2);
 
 
             Negozio negozio3 = new Negozio();
@@ -63,7 +63,7 @@ public class ShopzoneServerApplication {
             negozio3.setCitta("Teramo");
             negozio3.setImmagineprofilo(picInBytes);
           //  negozio3.setImmagineprofilo("negozio3.jpg");
-            negozioRepository.save(negozio3);
+           negozio3 = negozioRepository.save(negozio3);
 
 
             Utente marco = new Utente();
@@ -73,7 +73,7 @@ public class ShopzoneServerApplication {
             marco.setCognome("Autili");
             marco.setEmail("marco.mengoni@gaio.it");
             marco.setNegozio(negozio);
-            utenteRepository.save(marco);
+            marco = utenteRepository.save(marco);
 
             Utente fabio = new Utente();
             fabio.setUsername("fabio");
@@ -82,7 +82,7 @@ public class ShopzoneServerApplication {
             fabio.setCognome("Gentile");
             fabio.setEmail("fabio.quartararo@business.it");
             fabio.setNegozio(negozio2);
-            utenteRepository.save(fabio);
+            fabio = utenteRepository.save(fabio);
 
 
             Utente laura = new Utente();
@@ -92,7 +92,7 @@ public class ShopzoneServerApplication {
             laura.setCognome("Gentile");
             laura.setEmail("laura.business@business.it");
             laura.setNegozio(negozio3);
-            utenteRepository.save(laura);
+            laura = utenteRepository.save(laura);
 
 
             Utente stefano = new Utente();
@@ -101,7 +101,7 @@ public class ShopzoneServerApplication {
             stefano.setNome("Stefano");
             stefano.setCognome("Tassoni");
             stefano.setEmail("stefano.tassato@professional.it");
-            utenteRepository.save(stefano);
+            stefano = utenteRepository.save(stefano);
 
 
             for (int i = 0; i < 10; i++) {
@@ -120,36 +120,36 @@ public class ShopzoneServerApplication {
 
                 double rnd = Math.random();
                 if (rnd < 0.3) {
-                notizia.addPiace(stefano);
-                    negozio.addNotizia(notizia);
-
+                    notizia.addPiace(stefano);
+                    notizia.setNegozio(negozio);
+                    //negozio.addNotizia(notizia);
                 } else {
                     if (rnd < 0.6) {
                         notizia.addPiace(stefano);
                         notizia.addPiace(laura);
                         notizia.addPiace(marco);
                         notizia.addPiace(fabio);
-                        negozio2.addNotizia(notizia);
+                        notizia.setNegozio(negozio2);
+
+                        //negozio2.addNotizia(notizia);
                     } else {
                         notizia.addPiace(stefano);
                         notizia.addPiace(laura);
-                        negozio3.addNotizia(notizia);
+                        notizia.setNegozio(negozio3);
+                        //negozio3.addNotizia(notizia);
                     }
 
                 }
-
                 notiziaRepository.save(notizia);
-
             }
 
             negozio.addPreferenzaUtente(stefano);
             negozio.addPreferenzaUtente(laura);
-
             negozio2.addPreferenzaUtente(stefano);
 
-            utenteRepository.save(laura);
-            utenteRepository.save(marco);
-            utenteRepository.save(fabio);
+            //utenteRepository.save(laura);
+            //utenteRepository.save(marco);
+            //utenteRepository.save(fabio);
             System.out.println(stefano.getNegoziPreferiti());
             System.out.println(negozio.getPreferiti());
             negozioRepository.save(negozio2);

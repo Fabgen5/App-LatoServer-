@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import ShopzoneServer.business.ShopzoneServerService;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,9 @@ public class RESTNegozioController {
     @GetMapping
     public List<NegozioResponse> findByLuogo(@RequestParam String citta) {
         List<Negozio> negozi = service.findAllNegozioByLuogo(citta);
+
         return Utility.negozioResponse(negozi);
+
 
     }
 
@@ -45,7 +48,8 @@ public class RESTNegozioController {
     @GetMapping("/home")
     public NegozioResponse home() {
         Long id = Utility.getUtente().getNegozio().getId();
-        NegozioResponse negozioResponse = new NegozioResponse(service.findNegozioById(id));
+        Negozio negozio = service.findNegozioById(id);
+        NegozioResponse negozioResponse = new NegozioResponse(negozio);
         return negozioResponse;
     }
 
@@ -55,6 +59,13 @@ public class RESTNegozioController {
         Negozio negozio = service.nuovoNegozio(nuovoNegozio,utente);
         return new NegozioResponse(negozio);
     }
+
+    @PutMapping("/aggiungi/{id}")
+        public NegozioResponse modificaNegozio(@PathVariable(value= "id") Long negozioId,@Valid @RequestBody NegozioRequest negozio){
+        Negozio negozioModificato = service.modificaNegozio(negozio, negozioId);
+        return new NegozioResponse(negozioModificato);
+    }
+
 
     @GetMapping("/preferiti")
     public List<NegozioResponse> listaPreferiti() {
@@ -66,6 +77,7 @@ public class RESTNegozioController {
         }
         return negozioResponse;
     }
+
 
 }
 
