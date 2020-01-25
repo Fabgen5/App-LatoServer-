@@ -32,7 +32,7 @@ public class Notizia {
     private Date dataPubblicazione;
 
     @ManyToOne
-    @JoinColumn(name = "ID_NEGOZIO", nullable = false)
+    @JoinColumn(name = "NEGOZIO", nullable = false)
     @JsonBackReference
     private Negozio negozio;
 

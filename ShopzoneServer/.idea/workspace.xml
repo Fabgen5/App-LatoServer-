@@ -3,21 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="82fc6159-3e9e-48e2-b700-b33035547fa8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/ShopzoneServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/ShopzoneServerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNegozioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNegozioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNotizieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNotizieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/ShopzoneServerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/ShopzoneServerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/impl/ShopzoneServerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/impl/ShopzoneServerServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/impl/repositories/NotiziaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/impl/repositories/NotiziaRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Negozio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Negozio.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Notizia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Notizia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/ShopzoneServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/ShopzoneServerApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/api/RESTNegozioController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/api/RESTNegozioController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/business/ShopzoneServerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/business/ShopzoneServerService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/business/impl/ShopzoneServerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/business/impl/ShopzoneServerServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/business/impl/repositories/NotiziaRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/business/impl/repositories/NotiziaRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Utente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/domain/Negozio.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/domain/Negozio.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/domain/Notizia.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/domain/Notizia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ShopzoneServer/domain/Utente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShopzoneServer/domain/Utente.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -33,10 +24,36 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/ShopzoneServerApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="151" column="14" lean-forward="true" selection-start-line="151" selection-start-column="14" selection-end-line="151" selection-end-column="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#709#710#0" expanded="true" />
+                <element signature="e#785#786#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNotizieController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="87">
               <caret line="67" column="5" lean-forward="true" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Negozio.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -64,6 +81,28 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Utente.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="115">
+              <caret line="46" column="24" lean-forward="true" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
+              <folding>
+                <element signature="e#1966#1967#0" expanded="true" />
+                <element signature="e#1997#1998#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Notizia.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="34" column="24" lean-forward="true" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -132,17 +171,17 @@
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/NegozioResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/NotiziaResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/NotiziaRequest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Utente.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/UtenteResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNegozioController.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/impl/repositories/NegozioRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/ShopzoneServerApplication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Notizia.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Negozio.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/impl/repositories/NotiziaRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/ShopzoneServerService.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/business/impl/ShopzoneServerServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/api/RESTNotizieController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Negozio.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Utente.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Notizia.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ShopzoneServer/ShopzoneServerApplication.java" />
       </list>
     </option>
   </component>
@@ -385,12 +424,12 @@
       <workItem from="1579734985700" duration="4303000" />
       <workItem from="1579857317975" duration="228000" />
       <workItem from="1579862170234" duration="15858000" />
-      <workItem from="1579946940351" duration="2952000" />
+      <workItem from="1579946940351" duration="3351000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="227439000" />
+    <option name="totallyTimeSpent" value="227838000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -403,8 +442,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7407932" visible="true" weight="0.024291499" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7407932" visible="true" weight="0.17165992" />
       <window_info id="Structure" order="1" sideWeight="0.2592068" side_tool="true" weight="0.2536913" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -414,7 +454,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32974428" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4742451" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.39431617" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -722,28 +762,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Notizia.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.1.8.RELEASE/spring-data-commons-2.1.8.RELEASE.jar!/org/springframework/data/repository/CrudRepository.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
           <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Utente.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="44" selection-start-line="44" selection-end-line="47" selection-end-column="28" />
-          <folding>
-            <element signature="e#1966#1967#0" expanded="true" />
-            <element signature="e#1997#1998#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -769,28 +791,6 @@
             <element signature="e#1140#1141#0" expanded="true" />
             <element signature="e#1202#1203#0" expanded="true" />
             <element signature="e#1256#1257#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Negozio.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="153" column="2" selection-start-line="153" selection-start-column="2" selection-end-line="153" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/ShopzoneServerApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#709#710#0" expanded="true" />
-            <element signature="e#785#786#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -838,6 +838,46 @@
           <caret line="67" column="5" lean-forward="true" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Negozio.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Utente.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="46" column="24" lean-forward="true" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
+          <folding>
+            <element signature="e#1966#1967#0" expanded="true" />
+            <element signature="e#1997#1998#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/domain/Notizia.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="34" column="24" lean-forward="true" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ShopzoneServer/ShopzoneServerApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="151" column="14" lean-forward="true" selection-start-line="151" selection-start-column="14" selection-end-line="151" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#709#710#0" expanded="true" />
+            <element signature="e#785#786#0" expanded="true" />
           </folding>
         </state>
       </provider>

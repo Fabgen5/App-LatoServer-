@@ -44,7 +44,7 @@ public class Utente {
 
 
     @ManyToOne
-    @JoinColumn(name = "ID_NEGOZIO", nullable = true)
+    @JoinColumn(name = "NEGOZIO", nullable = true)
     private Negozio negozio;
 
     public Negozio getNegozio() {
