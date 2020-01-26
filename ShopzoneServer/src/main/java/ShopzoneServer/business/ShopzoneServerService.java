@@ -31,7 +31,7 @@ public interface ShopzoneServerService {
 
     Negozio nuovoNegozio(NegozioRequest nuovoNegozio, Utente utente) throws BusinessException;
 
-    void eliminaNegozio(long idNegozio, Utente utente) throws BusinessException;
+    void eliminaNegozio(long idNegozio, String username) throws BusinessException;
 
     Negozio modificaNegozio(NegozioRequest negozio, Long negozioId) throws BusinessException;
 

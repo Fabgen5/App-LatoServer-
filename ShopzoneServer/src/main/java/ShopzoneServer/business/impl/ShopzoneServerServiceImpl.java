@@ -12,6 +12,7 @@ import ShopzoneServer.api.NotiziaRequest;
 import ShopzoneServer.api.NotiziaResponse;
 import ShopzoneServer.api.RegistrazioneRequest;
 import ShopzoneServer.business.impl.repositories.*;
+import ShopzoneServer.common.Utility;
 import ShopzoneServer.domain.*;
 import jdk.management.resource.ResourceRequestDeniedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,26 +123,14 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 		System.out.println("strunz=" + result.getId());
 		return result;
 
-		/*
-		Negozio negozio = negozioRepository.findById(negozioId).get();
-		negozio.setId(negozioId);
-		negozio.setNome(negozioModificato.getNome());
-		negozio.setDescrizione(negozioModificato.getDescrizione());
-		negozio.setCitta(negozioModificato.getCitta());
-		negozio.setVia(negozioModificato.getVia());
-		negozio.setImmagineprofilo(Base64.getDecoder().decode(negozioModificato.getImmagineprofilo()));
-
-		return negozioRepository.save(negozio);
-		*/
-
 	}
 
 	@Override
-	public void eliminaNegozio(long idNegozio, Utente utente) throws BusinessException {
-		utente.setNegozio(null);
-		utenteRepository.save(utente);
-		negozioRepository.deleteById(idNegozio);
-
+	public void eliminaNegozio(long idNegozio, String username) throws BusinessException {
+		Utente u = utenteRepository.findByUsername(username);
+		u.setNegozio(null);
+		Negozio negozio = negozioRepository.findById(idNegozio).get();
+		negozioRepository.delete(negozio);
 	}
 
 
@@ -159,12 +148,12 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 
 	@Override
 	public Notizia modificaNotizia(NotiziaRequest notiziaModificata, Long notiziaId) throws BusinessException {
-		Notizia notizia = new Notizia();
-
+		Notizia notizia = notiziaRepository.findById(notiziaId).get();
 		notizia.setTitolo(notiziaModificata.getTitolo());
 		notizia.setDescrizione(notiziaModificata.getDescrizione());
 		notizia.setImmagine(Base64.getDecoder().decode(notiziaModificata.getImmagine()));
-		return notiziaRepository.save(notizia);
+
+		return notizia;
 	}
 
 	@Override

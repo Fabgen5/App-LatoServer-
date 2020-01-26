@@ -38,6 +38,15 @@ public class RESTNegozioController {
         return negozioResponse;
     }
 
+    @DeleteMapping("/{id}")
+    public void eliminaNegozio(@PathVariable Long id){
+        Negozio n = service.findNegozioById(id);
+        Utente utente = Utility.getUtente();
+        if(n.getId() == utente.getNegozio().getId()) {
+            service.eliminaNegozio(id,utente.getUsername());
+        }
+    }
+
     @GetMapping("/{id}/notizie")
     public List<NotiziaResponse> list(@PathVariable Long id) {
         List<Notizia> notizie = service.findAllNotizieNegozio(id);
@@ -77,6 +86,7 @@ public class RESTNegozioController {
         }
         return negozioResponse;
     }
+
 
 
 }
