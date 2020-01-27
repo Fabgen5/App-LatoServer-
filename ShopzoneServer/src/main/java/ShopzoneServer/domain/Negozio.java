@@ -42,13 +42,22 @@ public class Negozio {
     )
     private Set<Utente> preferiti = new HashSet<Utente>();
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "negozio")
+    @OneToMany(mappedBy = "negozio")
     @JsonManagedReference
     private Set<Notizia> notizie = new HashSet<Notizia>();
 
+    public Negozio(NegozioRequest nuovo) {
+        this.setNome(nuovo.getNome());
+        this.setDescrizione(nuovo.getDescrizione());
+        this.setCitta(nuovo.getCitta());
+        this.setVia(nuovo.getVia());
+        this.setImmagineprofilo(Base64.getDecoder().decode(nuovo.getImmagineprofilo()));
+    }
 
+    public Negozio() {
+    }
 
-     public Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -112,17 +121,6 @@ public class Negozio {
         this.preferiti = preferiti;
     }
 
-    public void addPreferenzaUtente(Utente utente) {
-        this.preferiti.add(utente);
-        //utente.getNegoziPreferiti().add(this);
-    }
-
-    public void removePreferenzaUtente(Utente utente) {
-        this.preferiti.remove(utente);
-        //utente.getNegoziPreferiti().remove(this);
-    }
-
-    /*
     @Override
     public String toString() {
         return "Negozio{" +
@@ -150,17 +148,5 @@ public class Negozio {
     @Override
     public int hashCode() {
         return Objects.hash(id, citta, via, nome, descrizione, immagineprofilo);
-    }
-*/
-
-    public Negozio(NegozioRequest nuovo) {
-        this.setNome(nuovo.getNome());
-        this.setDescrizione(nuovo.getDescrizione());
-        this.setCitta(nuovo.getCitta());
-        this.setVia(nuovo.getVia());
-        this.setImmagineprofilo(Base64.getDecoder().decode(nuovo.getImmagineprofilo()));
-    }
-
-    public Negozio() {
     }
 }

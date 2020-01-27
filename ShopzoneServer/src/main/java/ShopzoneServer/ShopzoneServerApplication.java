@@ -35,7 +35,6 @@ public class ShopzoneServerApplication {
             negozio.setDescrizione("Freeway");
             negozio.setCitta("Teramo");
             negozio.setVia("Via Madonna degli Angeli, 8");
-           // negozio.setImmagineprofilo("Negozio0.jpg");
             File file = new File("Immagini-DB/Logofreeway.jpg");
             byte[] picInBytes = new byte[(int) file.length()];
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -51,19 +50,28 @@ public class ShopzoneServerApplication {
             negozio2.setDescrizione("Abbigliamento uomo donna, orario continuato");
             negozio2.setCitta("Pescara");
             negozio2.setVia("Via Pettino, 8");
-            negozio2.setImmagineprofilo(picInBytes);
-           // negozio2.setImmagineprofilo("Negozio2.jpg");
+            File file2 = new File("Immagini-DB/Bershka.jpg");
+            byte[] picInBytes2 = new byte[(int) file2.length()];
+            FileInputStream fileInputStream2 = new FileInputStream(file2);
+            fileInputStream2.read(picInBytes2);
+            fileInputStream2.close();
+            negozio2.setImmagineprofilo(picInBytes2);
             negozio2 = negozioRepository.save(negozio2);
 
 
             Negozio negozio3 = new Negozio();
-            negozio3.setNome("Stardust");
+            negozio3.setNome("Sottotono");
             negozio3.setDescrizione("Stardust2 dal 2010");
             negozio3.setVia("Via Santa Lucia,22");
             negozio3.setCitta("Teramo");
-            negozio3.setImmagineprofilo(picInBytes);
-          //  negozio3.setImmagineprofilo("negozio3.jpg");
-           negozio3 = negozioRepository.save(negozio3);
+            File file3 = new File("Immagini-DB/sottotono.jpg");
+            byte[] picInBytes3 = new byte[(int) file3.length()];
+            FileInputStream fileInputStream3 = new FileInputStream(file3);
+            fileInputStream3.read(picInBytes3);
+            fileInputStream3.close();
+            negozio3.setImmagineprofilo(picInBytes3);
+
+            negozio3 = negozioRepository.save(negozio3);
 
 
             Utente marco = new Utente();
@@ -120,40 +128,34 @@ public class ShopzoneServerApplication {
 
                 double rnd = Math.random();
                 if (rnd < 0.3) {
-                    notizia.addPiace(stefano);
+
                     notizia.setNegozio(negozio);
-                    //negozio.addNotizia(notizia);
+                    stefano.getNotiziePiaciute().add(notizia);
                 } else {
                     if (rnd < 0.6) {
-                        notizia.addPiace(stefano);
-                        notizia.addPiace(laura);
-                        notizia.addPiace(marco);
-                        notizia.addPiace(fabio);
                         notizia.setNegozio(negozio2);
+                        fabio.getNotiziePiaciute().add(notizia);
+                        stefano.getNotiziePiaciute().add(notizia);
+                        laura.getNotiziePiaciute().add(notizia);
 
-                        //negozio2.addNotizia(notizia);
                     } else {
-                        notizia.addPiace(stefano);
-                        notizia.addPiace(laura);
+
                         notizia.setNegozio(negozio3);
-                        //negozio3.addNotizia(notizia);
+                        laura.getNotiziePiaciute().add(notizia);
+                        marco.getNotiziePiaciute().add(notizia);
+
+
                     }
 
                 }
-                notiziaRepository.save(notizia);
+                notizia = notiziaRepository.save(notizia);
             }
-
-            negozio.addPreferenzaUtente(stefano);
-            negozio.addPreferenzaUtente(laura);
-            negozio2.addPreferenzaUtente(stefano);
-
-            //utenteRepository.save(laura);
-            //utenteRepository.save(marco);
-            //utenteRepository.save(fabio);
-            System.out.println(stefano.getNegoziPreferiti());
-            System.out.println(negozio.getPreferiti());
+            negozio2.getPreferiti().add(laura);
             negozioRepository.save(negozio2);
-            negozioRepository.save(negozio);
+            utenteRepository.save(laura);
+            utenteRepository.save(stefano);
+            utenteRepository.save(marco);
+            utenteRepository.save(fabio);
 
         };
     }

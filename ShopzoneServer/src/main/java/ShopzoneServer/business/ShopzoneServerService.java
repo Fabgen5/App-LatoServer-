@@ -11,8 +11,6 @@ public interface ShopzoneServerService {
 
     Utente findUtenteByUsername(String username) throws BusinessException;
 
-    Utente updateProfilo(Utente utente) throws BusinessException;
-
     Utente nuovoUtente(RegistrazioneRequest registrazioneRequest) throws BusinessException;
 
     List<Notizia> findAllNotizie() throws BusinessException;
@@ -27,6 +25,10 @@ public interface ShopzoneServerService {
 
     Notizia nuovaNotizia(NotiziaRequest notizia, Negozio negozio) throws BusinessException;
 
+    void eliminaNotizia(long idNotizia) throws BusinessException;
+
+    Notizia modificaNotizia(NotiziaRequest notizia, Long notiziaId) throws BusinessException;
+
     List<Negozio> findAllNegoziPreferiti(Utente utente) throws BusinessException;
 
     Negozio nuovoNegozio(NegozioRequest nuovoNegozio, Utente utente) throws BusinessException;
@@ -34,10 +36,14 @@ public interface ShopzoneServerService {
     void eliminaNegozio(long idNegozio, String username) throws BusinessException;
 
     Negozio modificaNegozio(NegozioRequest negozio, Long negozioId) throws BusinessException;
+    //NOTIZIA PIACE
 
-    void eliminaNotizia(long idNotizia, Negozio negozio) throws BusinessException;
+    Notizia miPiace(long idNotizia, long idUtente) throws BusinessException;
 
-    Notizia modificaNotizia(NotiziaRequest notizia, Long notiziaId) throws BusinessException;
+    Notizia rimuoviPiace(long idNotizia, long idUtente) throws BusinessException;
 
-    void miPiace(Long idNotizia, int Piace, Utente utente) throws BusinessException;
+    //NEGOZIO A PREFERITI
+    Negozio rimuoviPreferito(long idNegozio, long idUtente) throws BusinessException;
+
+    Negozio aggiungiPreferito(long idNegozio, long idUtente) throws BusinessException;
 }

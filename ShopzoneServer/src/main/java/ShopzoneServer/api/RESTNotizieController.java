@@ -37,6 +37,21 @@ public class RESTNotizieController {
         return new NotiziaResponse(nuovaNotizia);
     }
 
+    @DeleteMapping("/{id}")
+    public void eliminaNotizia(@PathVariable(value= "id") long idNotizia ) {
+        Notizia notizia = service.findNotiziaById(idNotizia);
+        Utente utente = Utility.getUtente();
+        if(utente.getNegozio().getId() == notizia.getNegozio().getId()){
+            service.eliminaNotizia(idNotizia);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public NotiziaResponse modificaNotizia(@PathVariable(value= "id") Long notiziaId, @Valid @RequestBody NotiziaRequest notizia) {
+        Notizia notiziaModificata = service.modificaNotizia(notizia, notiziaId);
+        return new NotiziaResponse(notiziaModificata);
+    }
+
     @GetMapping("/{id}")
     public NotiziaResponse findById(@PathVariable Long id) {
         try{
@@ -48,24 +63,21 @@ public class RESTNotizieController {
         }
 
     }
-    @PutMapping("/{id}/{piace}")
-    public void miPiace(@PathVariable long id,@PathVariable int piace){
-        Utente utente= Utility.getUtente();
-        service.miPiace(id, piace, utente);
+
+    @PostMapping("/{id}/piace")
+    public NotiziaResponse notiziaPiace(@PathVariable long id){
+        Utente utente = Utility.getUtente();
+        NotiziaResponse notiziaResponse = new NotiziaResponse(service.miPiace(id , utente.getId()), utente);
+        return notiziaResponse;
     }
 
-
-    @DeleteMapping("/{id}")
-    public void eliminaNotizia(@PathVariable long idNotizia ) {
-        Negozio negozio = Utility.getUtente().getNegozio();
-        service.eliminaNotizia(idNotizia , negozio);
+    @DeleteMapping("/{id}/piace")
+    public NotiziaResponse notiziaRimuoviPiace(@PathVariable long id){
+        Utente utente = Utility.getUtente();
+        NotiziaResponse notiziaResponse = new NotiziaResponse(service.rimuoviPiace(id , utente.getId()), utente );
+        return notiziaResponse;
     }
 
-    @PutMapping("/aggiungi/{id}")
-    public NotiziaResponse modificaNotizia(@PathVariable(value= "id") Long notiziaId, @Valid @RequestBody NotiziaRequest notizia) {
-        Notizia notiziaModificata = service.modificaNotizia(notizia, notiziaId);
-        return new NotiziaResponse(notiziaModificata);
-    }
 
 }
 

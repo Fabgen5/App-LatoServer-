@@ -81,12 +81,6 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 		return negozioRepository.findById(id).get();
 	}
 
-	@Override
-	public Utente updateProfilo(Utente profilo) throws BusinessException {
-		Utente utente = utenteRepository.findByUsername(profilo.getUsername());
-		utente.setEmail(profilo.getEmail());
-		return utente;
-	}
 
 	@Override
 	public Utente nuovoUtente(RegistrazioneRequest registrazioneRequest) throws BusinessException{
@@ -157,27 +151,41 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	}
 
 	@Override
-	public void eliminaNotizia(long idNotizia, Negozio negozio) throws BusinessException {
-		Notizia notizia = notiziaRepository.findById(idNotizia).get();
-		negozio.getNotizie().remove(notizia);
-		negozioRepository.save(negozio);
+	public void eliminaNotizia(long idNotizia) throws BusinessException {
 		notiziaRepository.deleteById(idNotizia);
 	}
 
 	@Override
-	public void miPiace(Long idNotizia , int piace, Utente utente) throws BusinessException{
-		if (piace == 0) {
-			Notizia notizia = notiziaRepository.findById(idNotizia).get();
-			System.out.println(notizia.getPiace());
-			utente.removeNotiziaPiaciuta(notizia);
-			System.out.println(notizia.getPiace());
-			utenteRepository.save(utente);
-		}
-		else{
-			Notizia notizia = notiziaRepository.findById(idNotizia).get();
-			utente.addNotiziaPiaciuta(notizia);
-			utenteRepository.save(utente);
-			notiziaRepository.save(notizia);
-		}
+	public Notizia miPiace(long idNotizia, long idUtente){
+		Utente utente = utenteRepository.findById(idUtente).get();
+		Notizia notizia = notiziaRepository.findById(idNotizia).get();
+		utente.getNotiziePiaciute().add(notizia);
+		return notizia;
+
+	}
+
+	@Override
+	public Notizia rimuoviPiace(long idNotizia, long idUtente){
+		Utente utente = utenteRepository.findById(idUtente).get();
+		Notizia notizia = notiziaRepository.findById(idNotizia).get();
+		utente.getNotiziePiaciute().remove(notizia);
+		return notizia;
+
+	}
+
+	@Override
+	public Negozio rimuoviPreferito(long idNegozio, long idUtente) throws BusinessException {
+		Utente utente = utenteRepository.findById(idUtente).get();
+		Negozio negozio = negozioRepository.findById(idNegozio).get();
+		negozio.getPreferiti().remove(utente);
+		return negozio;
+	}
+
+	@Override
+	public Negozio aggiungiPreferito(long idNegozio, long idUtente) throws BusinessException {
+		Utente utente = utenteRepository.findById(idUtente).get();
+		Negozio negozio = negozioRepository.findById(idNegozio).get();
+		negozio.getPreferiti().add(utente);
+		return negozio;
 	}
 }

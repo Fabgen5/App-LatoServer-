@@ -1,3 +1,4 @@
+
 package ShopzoneServer.domain;
 
 import javax.persistence.*;
@@ -39,7 +40,7 @@ public class Utente {
             inverseJoinColumns = {@JoinColumn(name = "ID_NOTIZIA")})
     private Set<Notizia> notiziePiaciute = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "preferiti")
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER, mappedBy = "preferiti")
     private Set<Negozio> negoziPreferiti = new HashSet<Negozio>();
 
 
@@ -123,15 +124,6 @@ public class Utente {
         this.notiziePiaciute = notiziePiaciute;
     }
 
-    public void addNotiziaPiaciuta(Notizia notizia) {
-        this.notiziePiaciute.add(notizia);
-        notizia.getPiace().add(this);
-    }
-
-    public void removeNotiziaPiaciuta(Notizia notizia) {
-        this.notiziePiaciute.remove(notizia);
-        notizia.getPiace().remove(this);
-    }
 
 
     @Override

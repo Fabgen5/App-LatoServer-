@@ -97,18 +97,6 @@ public class Notizia {
         this.piace = piace;
     }
 
-    public void addPiace(Utente utente) {
-        this.piace.add(utente);
-        //utente.getNotiziePiaciute().add(this);
-    }
-
-    public void removePiace(Utente utente) {
-
-        this.piace.remove(utente);
-        // utente.getNotiziePiaciute().remove(this);
-    }
-
-
     @Override
     public String toString() {
         return "Notizia{" +
