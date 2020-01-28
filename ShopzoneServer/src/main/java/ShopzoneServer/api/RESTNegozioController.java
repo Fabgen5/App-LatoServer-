@@ -49,34 +49,23 @@ public class RESTNegozioController {
 
     @DeleteMapping("/{id}")
     public void eliminaNegozio(@PathVariable Long id){
-        /*Negozio negozio = service.findNegozioById(id);
-        Utente utente = Utility.getUtente();
-        if(negozio.getId() == utente.getNegozio().getId()) {
-            service.eliminaNegozio(id,utente.getUsername());
-        }*/
         Utente utente = Utility.getUtente();
             Negozio negozio = service.findNegozioById(id);
             System.out.println("prima negozi" + negozio.getPreferiti());
-            //SVUOTO IL NEGOZIO ALL' UTENTE CHE HA PREFERITO
             for(Utente u : negozio.getPreferiti()){
                 u.getNegoziPreferiti().remove(negozio);
 
             }
-            //SVUOTO LE NOTIZIE
             for(Notizia n : negozio.getNotizie()){
-                //SVUOTO I LIKE RELATIVI ALLA NOTIZIA
                  for(Utente u : n.getPiace()){
                     u.getNotiziePiaciute().remove(n);
 
                 }
                 n.getPiace().clear();
-                 //ELIMINO LA NOTIZIA ALTRIMENTI RESTA NEL DB
                 service.eliminaNotizia(n);
 
             }
-            //SVUOTO NOTIZIE DEL NEGOZIO
             negozio.getNotizie().clear();
-            //SVUOTO PREFERITI DEL NEGOZIO
             negozio.getPreferiti().clear();
             service.eliminaNegozio(negozio, utente.getUsername());
     }

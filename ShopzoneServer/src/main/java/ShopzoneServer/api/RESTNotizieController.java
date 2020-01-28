@@ -42,12 +42,10 @@ public class RESTNotizieController {
     @DeleteMapping("/{id}")
     public void eliminaNotizia(@PathVariable(value = "id") long idNotizia) {
         Notizia notizia = service.findNotiziaById(idNotizia);
-        //SVUOTO AD OGNI UTENTE LA NOTIZIA DA ELIMINARE
         for(Utente u : notizia.getPiace()){
             u.getNotiziePiaciute().remove(notizia);
 
         }
-        //TOLGO GLI UTENTI ALLA NOTIZIA
         notizia.getPiace().clear();
         service.eliminaNotizia(notizia);
 }

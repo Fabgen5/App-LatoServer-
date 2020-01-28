@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface NotiziaRepository extends JpaRepository<Notizia, Long>{
 
-    List<Notizia> findByNegozioId(Long id);
+    List<Notizia> findByNegozioIdOrderByDataPubblicazioneDesc(Long id);
 
 }

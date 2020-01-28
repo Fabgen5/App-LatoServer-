@@ -54,7 +54,7 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 
 	@Override
 	public List<Notizia> findAllNotizieNegozio(Long id) throws BusinessException {
-		return notiziaRepository.findByNegozioId(id);
+		return notiziaRepository.findByNegozioIdOrderByDataPubblicazioneDesc(id);
 	}
 
 	@Override

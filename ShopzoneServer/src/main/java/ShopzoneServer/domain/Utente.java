@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.*;
 
 @Entity
-@Table(name = "utenti")
+@Table(name = "utente")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Utente {
 
