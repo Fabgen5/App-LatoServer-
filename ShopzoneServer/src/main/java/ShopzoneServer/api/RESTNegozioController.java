@@ -34,8 +34,17 @@ public class RESTNegozioController {
 
     @GetMapping("/{id}")
     public NegozioResponse findById(@PathVariable Long id) {
-        NegozioResponse negozioResponse = new NegozioResponse(service.findNegozioById(id));
-        return negozioResponse;
+        try{
+            Utente utente= Utility.getUtente();
+            NegozioResponse negozioResponse = new NegozioResponse(service.findNegozioById(id),utente);
+            return negozioResponse;
+        }
+        catch(Exception e){
+            NegozioResponse negozioResponse = new NegozioResponse(service.findNegozioById(id));
+            return negozioResponse;
+        }
+
+
     }
 
     @DeleteMapping("/{id}")
