@@ -1,7 +1,9 @@
 package ShopzoneServer.api;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ShopzoneServer.common.Utility;
 import ShopzoneServer.domain.Negozio;
@@ -33,48 +35,51 @@ public class RESTNotizieController {
     @PostMapping("/aggiungi")
     public NotiziaResponse nuovaNotizia(@RequestBody NotiziaRequest notizia) {
         Negozio negozio = Utility.getUtente().getNegozio();
-        Notizia nuovaNotizia = service.nuovaNotizia(notizia,negozio);
+        Notizia nuovaNotizia = service.nuovaNotizia(notizia, negozio);
         return new NotiziaResponse(nuovaNotizia);
     }
 
     @DeleteMapping("/{id}")
-    public void eliminaNotizia(@PathVariable(value= "id") long idNotizia ) {
+    public void eliminaNotizia(@PathVariable(value = "id") long idNotizia) {
         Notizia notizia = service.findNotiziaById(idNotizia);
-        Utente utente = Utility.getUtente();
-        if(utente.getNegozio().getId() == notizia.getNegozio().getId()){
-            service.eliminaNotizia(idNotizia);
+        //SVUOTO AD OGNI UTENTE LA NOTIZIA DA ELIMINARE
+        for(Utente u : notizia.getPiace()){
+            u.getNotiziePiaciute().remove(notizia);
+
         }
-    }
+        //TOLGO GLI UTENTI ALLA NOTIZIA
+        notizia.getPiace().clear();
+        service.eliminaNotizia(notizia);
+}
 
     @PutMapping("/{id}")
-    public NotiziaResponse modificaNotizia(@PathVariable(value= "id") Long notiziaId, @Valid @RequestBody NotiziaRequest notizia) {
+    public NotiziaResponse modificaNotizia(@PathVariable(value = "id") Long notiziaId, @Valid @RequestBody NotiziaRequest notizia) {
         Notizia notiziaModificata = service.modificaNotizia(notizia, notiziaId);
         return new NotiziaResponse(notiziaModificata);
     }
 
     @GetMapping("/{id}")
     public NotiziaResponse findById(@PathVariable Long id) {
-        try{
-            Utente utente= Utility.getUtente();
-            return new NotiziaResponse(service.findNotiziaById(id),utente);
-        }
-        catch(Exception e){
+        try {
+            Utente utente = Utility.getUtente();
+            return new NotiziaResponse(service.findNotiziaById(id), utente);
+        } catch (Exception e) {
             return new NotiziaResponse(service.findNotiziaById(id));
         }
 
     }
 
     @PostMapping("/{id}/piace")
-    public NotiziaResponse notiziaPiace(@PathVariable long id){
+    public NotiziaResponse notiziaPiace(@PathVariable long id) {
         Utente utente = Utility.getUtente();
-        NotiziaResponse notiziaResponse = new NotiziaResponse(service.miPiace(id , utente.getId()), utente);
+        NotiziaResponse notiziaResponse = new NotiziaResponse(service.miPiace(id, utente.getId()), utente);
         return notiziaResponse;
     }
 
     @DeleteMapping("/{id}/piace")
-    public NotiziaResponse notiziaRimuoviPiace(@PathVariable long id){
+    public NotiziaResponse notiziaRimuoviPiace(@PathVariable long id) {
         Utente utente = Utility.getUtente();
-        NotiziaResponse notiziaResponse = new NotiziaResponse(service.rimuoviPiace(id , utente.getId()), utente );
+        NotiziaResponse notiziaResponse = new NotiziaResponse(service.rimuoviPiace(id, utente.getId()), utente);
         return notiziaResponse;
     }
 

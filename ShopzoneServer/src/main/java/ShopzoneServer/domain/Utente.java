@@ -34,7 +34,7 @@ public class Utente {
     private String email;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST},fetch = FetchType.EAGER)
     @JoinTable(name = "UTENTE_NOTIZIA_PIACE",
             joinColumns = {@JoinColumn(name = "ID_UTENTE")},
             inverseJoinColumns = {@JoinColumn(name = "ID_NOTIZIA")})

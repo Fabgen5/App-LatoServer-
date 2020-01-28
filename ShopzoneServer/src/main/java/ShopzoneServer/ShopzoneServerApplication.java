@@ -130,10 +130,12 @@ public class ShopzoneServerApplication {
                 if (rnd < 0.3) {
 
                     notizia.setNegozio(negozio);
+                    notizia = notiziaRepository.save(notizia);
                     stefano.getNotiziePiaciute().add(notizia);
                 } else {
                     if (rnd < 0.6) {
                         notizia.setNegozio(negozio2);
+                        notizia = notiziaRepository.save(notizia);
                         fabio.getNotiziePiaciute().add(notizia);
                         stefano.getNotiziePiaciute().add(notizia);
                         laura.getNotiziePiaciute().add(notizia);
@@ -141,6 +143,7 @@ public class ShopzoneServerApplication {
                     } else {
 
                         notizia.setNegozio(negozio3);
+                        notizia = notiziaRepository.save(notizia);
                         laura.getNotiziePiaciute().add(notizia);
                         marco.getNotiziePiaciute().add(notizia);
 
@@ -148,9 +151,10 @@ public class ShopzoneServerApplication {
                     }
 
                 }
-                notizia = notiziaRepository.save(notizia);
+
             }
             negozio2.getPreferiti().add(laura);
+            negozio2.getPreferiti().add(stefano);
             negozioRepository.save(negozio2);
             utenteRepository.save(laura);
             utenteRepository.save(stefano);

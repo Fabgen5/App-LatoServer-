@@ -32,12 +32,12 @@ public class Notizia {
     private Date dataPubblicazione;
 
     @ManyToOne
-    @JoinColumn(name = "NEGOZIO", nullable = false)
+    @JoinColumn(name = "NEGOZIO", nullable = true)
     @JsonBackReference
     private Negozio negozio;
 
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "notiziePiaciute")
+    @ManyToMany(cascade = {CascadeType.PERSIST},fetch = FetchType.EAGER, mappedBy = "notiziePiaciute")
     private Set<Utente> piace = new HashSet<Utente>();
 
 

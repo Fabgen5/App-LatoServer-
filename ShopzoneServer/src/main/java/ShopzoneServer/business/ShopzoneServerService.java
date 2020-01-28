@@ -25,7 +25,7 @@ public interface ShopzoneServerService {
 
     Notizia nuovaNotizia(NotiziaRequest notizia, Negozio negozio) throws BusinessException;
 
-    void eliminaNotizia(long idNotizia) throws BusinessException;
+    void eliminaNotizia(Notizia notizia) throws BusinessException;
 
     Notizia modificaNotizia(NotiziaRequest notizia, Long notiziaId) throws BusinessException;
 
@@ -33,7 +33,7 @@ public interface ShopzoneServerService {
 
     Negozio nuovoNegozio(NegozioRequest nuovoNegozio, Utente utente) throws BusinessException;
 
-    void eliminaNegozio(long idNegozio, String username) throws BusinessException;
+    void eliminaNegozio(Negozio negozio, String username) throws BusinessException;
 
     Negozio modificaNegozio(NegozioRequest negozio, Long negozioId) throws BusinessException;
     //NOTIZIA PIACE

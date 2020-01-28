@@ -42,7 +42,7 @@ public class Negozio {
     )
     private Set<Utente> preferiti = new HashSet<Utente>();
 
-    @OneToMany(mappedBy = "negozio")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "negozio")
     @JsonManagedReference
     private Set<Notizia> notizie = new HashSet<Notizia>();
 

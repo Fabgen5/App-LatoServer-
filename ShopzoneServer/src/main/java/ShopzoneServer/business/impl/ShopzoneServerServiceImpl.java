@@ -15,6 +15,7 @@ import ShopzoneServer.business.impl.repositories.*;
 import ShopzoneServer.common.Utility;
 import ShopzoneServer.domain.*;
 import jdk.management.resource.ResourceRequestDeniedException;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.JpaSort;
@@ -119,14 +120,11 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 
 	}
 
-	@Override
-	public void eliminaNegozio(long idNegozio, String username) throws BusinessException {
+	public void eliminaNegozio(Negozio negozio, String username) throws BusinessException {
 		Utente u = utenteRepository.findByUsername(username);
 		u.setNegozio(null);
-		Negozio negozio = negozioRepository.findById(idNegozio).get();
 		negozioRepository.delete(negozio);
 	}
-
 
 	@Override
 	public Notizia nuovaNotizia(NotiziaRequest notizia, Negozio negozio)throws BusinessException{
@@ -151,8 +149,8 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 	}
 
 	@Override
-	public void eliminaNotizia(long idNotizia) throws BusinessException {
-		notiziaRepository.deleteById(idNotizia);
+	public void eliminaNotizia(Notizia notizia) throws BusinessException {
+		notiziaRepository.delete(notizia);
 	}
 
 	@Override
@@ -188,4 +186,5 @@ public class ShopzoneServerServiceImpl implements ShopzoneServerService {
 		negozio.getPreferiti().add(utente);
 		return negozio;
 	}
+
 }
