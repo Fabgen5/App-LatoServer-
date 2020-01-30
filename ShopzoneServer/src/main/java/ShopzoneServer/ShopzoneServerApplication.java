@@ -154,8 +154,10 @@ public class ShopzoneServerApplication {
 
             }
             negozio2.getPreferiti().add(laura);
+            negozio.getPreferiti().add(laura);
             negozio2.getPreferiti().add(stefano);
             negozioRepository.save(negozio2);
+            negozioRepository.save(negozio);
             utenteRepository.save(laura);
             utenteRepository.save(stefano);
             utenteRepository.save(marco);
